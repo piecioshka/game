@@ -2,7 +2,7 @@
 
 :video_game: TODO
 
-## Demo 🎉
+## Preview 🎉
 
 <https://piecioshka.github.io/game/>
 
