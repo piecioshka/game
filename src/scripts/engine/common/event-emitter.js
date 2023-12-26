@@ -1,8 +1,8 @@
 export class EventEmitter {
   _listeners = {};
 
-  trigger(name) {
-    this._listeners[name].forEach(({ cb }) => cb());
+  emit(name) {
+    this._listeners[name]?.forEach(({ cb }) => cb());
   }
 
   on(name, cb) {

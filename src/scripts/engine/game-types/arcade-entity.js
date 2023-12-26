@@ -1,5 +1,6 @@
-import { EngineEntity } from '../../engine/engine-entity.js';
-import { EngineKeyboard, KEYBOARD } from '../../engine/engine-keyboard.js';
+import { EngineEntity } from './engine-entity.js';
+import { EngineKeyboard } from '../engine-keyboard.js';
+import { KEYBOARD } from '../common/keyboard';
 
 export class ArcadeEntity extends EngineEntity {
   deltaMove = 3;
@@ -10,13 +11,19 @@ export class ArcadeEntity extends EngineEntity {
   }
 
   _setupKeyboard() {
-    const world = this.config.world;
+    const { world, controlKeys } = this.config;
     this.keyboard = new EngineKeyboard({ world });
-    this.keyboard.on(KEYBOARD.LEFT, this.onPressLeft.bind(this));
-    this.keyboard.on(KEYBOARD.RIGHT, this.onPressRight.bind(this));
-    this.keyboard.on(KEYBOARD.UP, this.onPressUp.bind(this));
-    this.keyboard.on(KEYBOARD.DOWN, this.onPressDown.bind(this));
-    this.keyboard.on(KEYBOARD.SPACE, this.onPressSpace.bind(this));
+    const { up, right, down, left, a, b } = controlKeys;
+    this.keyboard.on(KEYBOARD[up], this.onPressUp.bind(this));
+    this.keyboard.on(KEYBOARD[right], this.onPressRight.bind(this));
+    this.keyboard.on(KEYBOARD[down], this.onPressDown.bind(this));
+    this.keyboard.on(KEYBOARD[left], this.onPressLeft.bind(this));
+    if (a) {
+      this.keyboard.on(KEYBOARD[a], this.onPressAButton.bind(this));
+    }
+    if (b) {
+      this.keyboard.on(KEYBOARD[b], this.onPressBButton.bind(this));
+    }
   }
 
   applyBoundaries(props) {
@@ -74,7 +81,11 @@ export class ArcadeEntity extends EngineEntity {
     });
   }
 
-  onPressSpace() {
-    console.log('shot shot from ArcadeEntity');
+  onPressAButton() {
+    // console.log('ArcadeEntity: on press A button');
+  }
+
+  onPressBButton() {
+    // console.log('ArcadeEntity: on press B button');
   }
 }

@@ -11,7 +11,7 @@ export class EngineWorld {
   }
 
   constructor() {
-    console.log('new');
+    // console.log('new');
   }
 
   get width() {
@@ -33,7 +33,7 @@ export class EngineWorld {
   }
 
   render($target) {
-    console.log('render');
+    // console.log('render');
 
     $target.innerHTML = '';
     $target.appendChild(this.$canvas);

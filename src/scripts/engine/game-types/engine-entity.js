@@ -1,4 +1,4 @@
-import { EngineAssetsLoader } from './engine-assets-loader';
+import { EngineAssetsLoader } from '../engine-assets-loader';
 
 const console = {
   log: require('debug')('game:EngineEntity:log'),
@@ -12,6 +12,14 @@ export class EngineEntity {
     y: 0,
     width: 80,
     height: 80,
+    controlKeys: [
+      // top
+      // right
+      // down
+      // left
+      // a (special button, like we had in pads)
+      // b (special button, like we had in pads)
+    ],
   };
 
   keyboard = null;
@@ -29,7 +37,7 @@ export class EngineEntity {
   }
 
   constructor(props) {
-    console.log('new');
+    // console.log('new');
     Object.assign(this.config, props);
     this.config.world.addItem(this);
   }
@@ -46,7 +54,7 @@ export class EngineEntity {
   }
 
   moveTo(props) {
-    console.log('moveTo', props);
+    // console.log('moveTo', props);
     Object.assign(this.config, props);
     this.render();
   }

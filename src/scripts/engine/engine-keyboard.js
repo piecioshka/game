@@ -1,19 +1,10 @@
 import { EventEmitter } from './common/event-emitter';
-import { Enum } from './common/enum';
+import { KEYBOARD } from './common/keyboard';
 
 const console = {
   log: require('debug')('game:EngineKeyboard:log'),
+  debug: require('debug')('game:EngineKeyboard:debug'),
 };
-
-export const KEYBOARD = new Enum({
-  LEFT: 37,
-  UP: 38,
-  RIGHT: 39,
-  DOWN: 40,
-  SPACE: 32,
-  ENTER: 13,
-  ESCAPE: 27,
-});
 
 export class EngineKeyboard extends EventEmitter {
   pressKeys = new Map();
@@ -24,7 +15,7 @@ export class EngineKeyboard extends EventEmitter {
 
   constructor(props) {
     super();
-    console.log('new');
+    // console.log('new');
     Object.assign(this.config, props);
     this.config.world.addItem(this);
     this._handleKeyboardEvents();
@@ -57,8 +48,6 @@ export class EngineKeyboard extends EventEmitter {
       return;
     }
 
-    const codeString = KEYBOARD[codeName];
-
-    this.trigger(codeString);
+    this.emit(codeName);
   }
 }

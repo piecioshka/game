@@ -16,7 +16,7 @@ export class EngineGame {
   world = null;
 
   constructor(settings) {
-    console.log('new');
+    // console.log('new');
     Object.assign(this.config, settings);
   }
 
@@ -26,7 +26,7 @@ export class EngineGame {
   }
 
   async start() {
-    console.log('start');
+    // console.log('start');
     this.world.setSize(this.config);
 
     await EngineAssetsLoader.load(this.assets);
@@ -35,7 +35,7 @@ export class EngineGame {
   }
 
   render() {
-    console.log('render');
+    // console.log('render');
     this.world.render(this.config.$placeHolder);
   }
 
