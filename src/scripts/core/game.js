@@ -4,7 +4,7 @@ import { Player } from './player';
 
 export class Game extends EngineGame {
   assets = {
-    player: 'assets/figure.png',
+    player: 'assets/character.png',
   };
 
   world = null;
