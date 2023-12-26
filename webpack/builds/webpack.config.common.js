@@ -1,9 +1,8 @@
 'use strict';
 
 const path = require('path');
-const root = path.join(__dirname, '..');
+const root = path.join(__dirname, '..', '..');
 const merge = require('webpack-merge');
-const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (env) => {
   let config = {
@@ -26,10 +25,7 @@ module.exports = (env) => {
         {
           test: /\.css$/,
           exclude: /node_modules/,
-          use: [
-            'style-loader',
-            'css-loader',
-          ],
+          use: ['style-loader', 'css-loader'],
         },
         {
           test: /\.html$/,
@@ -42,46 +38,25 @@ module.exports = (env) => {
       ],
     },
 
-    plugins: [
-      new CopyPlugin({
-        patterns: [
-          { from: 'src/assets/', to: 'assets' },
-        ],
-      }),
-    ],
-
     devServer: {
       overlay: true,
     },
   };
-
-  // Builds
-  const build = env && env.production ? 'prod' : 'dev';
-  config = merge.default(
-    config,
-    require(path.join(root, 'webpack', 'builds', `webpack.config.${build}`))
-  );
 
   // Addons
   const addons = getAddons(env);
   addons.forEach((addon) => {
     config = merge.default(
       config,
-      require(path.join(root, 'webpack', 'addons', `webpack.${addon}`))
+      require(path.join(root, 'webpack', 'addons', `webpack.${addon}`)),
     );
   });
-
-  console.log(`Build mode: \x1b[33m${config.mode}\x1b[0m`);
 
   return config;
 };
 
 function getAddons(env) {
-  if (!env || !env.addons) {
-    return [];
-  }
-  if (typeof env.addons === 'string') {
-    return [env.addons];
-  }
+  if (!env || !env.addons) return [];
+  if (typeof env.addons === 'string') return env.addons.split(',');
   return env.addons;
 }

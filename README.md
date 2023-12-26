@@ -17,6 +17,7 @@
 
 ```bash
 npm run build               # Development mode
+npm run build:development   # Development mode
 npm run build:production    # Production mode
 ```
 
@@ -26,7 +27,6 @@ _Open `dist/` directory in browser by `npm start`._
 
 ```bash
 npm run dev     # Use webpack-dev-server
-npm run watch   # Use webpack -w
 ```
 
 _Open `dist/` directory in browser by `npm start`._
