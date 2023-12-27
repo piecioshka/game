@@ -3,7 +3,7 @@ module.exports = {
 
   parser: 'babel-eslint',
 
-  // http://eslint.org/docs/user-guide/configuring#specifying-environments
+  // https://eslint.org/docs/user-guide/configuring#specifying-environments
   env: {
     browser: true,
     node: true,
@@ -16,7 +16,7 @@ module.exports = {
     // jquery: true,
   },
 
-  // http://eslint.org/docs/rules/
+  // https://eslint.org/docs/rules/
   rules: {
     'no-magic-numbers': 'off',
     'no-use-before-define': 'off',
@@ -28,14 +28,17 @@ module.exports = {
     'comma-dangle': 'off',
     'object-property-newline': 'off',
     indent: ['error', 2],
+    'lines-around-comment': 'off',
+    'no-unused-vars': 'off',
+    'no-unused-expressions': 'off',
   },
 
   // List of global variables.
   globals: {},
 
   parserOptions: {
-    // Support syntax ES2018
-    ecmaVersion: 2018,
+    // Support syntax ES2023
+    ecmaVersion: 2023,
 
     // Support syntax ES2015 Import/Export
     sourceType: 'module',

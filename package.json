@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "game",
-    "description": "",
+    "description": "🎮 Canvas 2D Game Engine",
     "version": "0.0.1",
     "license": "MIT",
     "author": {
@@ -50,5 +50,22 @@
     "repository": {
         "type": "git",
         "url": "git@github.com:piecioshka/game.git"
-    }
+    },
+    "engines": {
+      "node": ">=18"
+    },
+    "files": [
+      "engine",
+      "package.json",
+      "LICENSE",
+      "README.md"
+    ],
+    "keywords": [
+      "canvas",
+      "game",
+      "engine",
+      "web",
+      "browser"
+    ],
+    "main": "./engine/index.js"
 }

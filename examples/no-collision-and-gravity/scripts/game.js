@@ -1,6 +1,4 @@
-import { EngineGame } from '@engine';
-import { EngineWorld } from '@engine';
-import { KEYBOARD } from '@engine';
+import { EngineGame, EngineWorld, KEYBOARD } from '@engine';
 import { Player } from './player';
 
 export class Game extends EngineGame {
@@ -16,7 +14,7 @@ export class Game extends EngineGame {
 
     const world = this.world = new EngineWorld();
 
-    const player = new Player({
+    const _player = new Player({
       name: 'Player A',
       world,
       assetId: 'characterA',
@@ -32,7 +30,7 @@ export class Game extends EngineGame {
         a: KEYBOARD.SPACE,
       },
     });
-    const enemy = new Player({
+    const _enemy = new Player({
       name: 'Player B',
       world,
       assetId: 'characterB',

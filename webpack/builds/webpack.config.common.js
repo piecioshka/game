@@ -62,7 +62,11 @@ module.exports = (env) => {
 };
 
 function getAddons(env) {
-  if (!env || !env.addons) return [];
-  if (typeof env.addons === 'string') return env.addons.split(',');
+  if (!env || !env.addons) {
+    return [];
+  }
+  if (typeof env.addons === 'string') {
+    return env.addons.split(',');
+  }
   return env.addons;
 }
