@@ -1,11 +1,6 @@
 import { EventEmitter } from '../utils/event-emitter';
 import { KEYS } from '../utils/keys';
 
-// const console = {
-//   log: require('debug')('game:EngineKeyboard:log'),
-//   debug: require('debug')('game:EngineKeyboard:debug'),
-// };
-
 export class EngineKeyboard extends EventEmitter {
   #pressKeys = new Map();
 

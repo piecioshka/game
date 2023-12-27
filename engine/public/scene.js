@@ -20,12 +20,6 @@ export class EngineScene extends EntitiesManager {
     ctx.fillRect(0, 0, world.width, world.height);
   }
 
-  clearScene() {
-    const world = this.config.world;
-    const ctx = world.context;
-    ctx.clearRect(0, 0, world.width, world.height);
-  }
-
   setup() {
     this.runOnAllEntities('setup');
   }

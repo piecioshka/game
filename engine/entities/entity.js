@@ -2,11 +2,6 @@ import { EngineAssetsLoader } from '../internal/assets-loader';
 import { UIEvents } from '../internal/ui-events';
 import { EventEmitter } from '../utils/event-emitter';
 
-const console = {
-  log: require('debug')('game:Entity:log'),
-  debug: require('debug')('game:Entity:debug'),
-};
-
 export class Entity extends EventEmitter {
   config = {
     /**

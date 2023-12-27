@@ -2,8 +2,6 @@ import './index.html';
 import './main.css';
 import { Game } from './scripts/game';
 
-require('debug').enable('game:*');
-
 function main() {
   const $area = document.querySelector('#game');
 

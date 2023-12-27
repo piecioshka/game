@@ -1,10 +1,5 @@
 import { SceneManager } from '../internal/scene-manager';
 
-// const console = {
-//   log: require('debug')('game:EngineWorld:log'),
-//   debug: require('debug')('game:EngineWorld:debug'),
-// };
-
 export class EngineWorld extends SceneManager {
   $canvas = document.createElement('canvas');
 

@@ -1,11 +1,6 @@
 import { EngineWorld } from './world';
 import { EngineAssetsLoader } from '../internal/assets-loader';
 
-// const console = {
-//   log: require('debug')('game:EngineGame:log'),
-//   debug: require('debug')('game:EngineGame:debug'),
-// };
-
 export class EngineGame {
   assets = {};
 

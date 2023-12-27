@@ -21,7 +21,6 @@ export class SceneManager {
     this.currentScene?.destroy();
     // console.debug(`[🚀] SceneManager > startScene [${name}]`);
     this.currentScene = this.scenes[name];
-    this.currentScene.clearScene();
     this.currentScene.setup?.();
   }
 }
