@@ -5,6 +5,10 @@ const console = {
 export class EngineWorld {
   items = [];
   $canvas = document.createElement('canvas');
+  config = {
+    isVisiblePlayerTitle: false,
+    isVisibleBoundingBox: false,
+  };
 
   get context() {
     return this.$canvas.getContext('2d');
@@ -23,7 +27,7 @@ export class EngineWorld {
   }
 
   setSize({ width, height }) {
-    console.log('setSize', width, height);
+    // console.log('setSize', width, height);
     this.$canvas.width = width;
     this.$canvas.height = height;
   }
@@ -49,10 +53,6 @@ export class EngineWorld {
     // console.log('update');
     this.context.clearRect(0, 0, this.width, this.height);
 
-    this.items.forEach((item) => {
-      if (item.update) {
-        item.update();
-      }
-    });
+    this.items.forEach((item) => item.update?.());
   }
 }

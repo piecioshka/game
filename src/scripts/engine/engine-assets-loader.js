@@ -8,12 +8,13 @@ const EngineAssetsLoader = {
   },
 
   loadImage(key, url) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => {
         this.assetsLoaded.set(key, img);
-        resolve();
+        resolve(img);
       };
+      img.onerror = () => reject();
       img.src = url;
     });
   },

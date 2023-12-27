@@ -9,7 +9,8 @@
 - [x] Create player
 - [x] Move player with LEFT, RIGHT arrows on keyboard
 - [x] Support different keys controls for each character on board
-- [ ] Display character name above the asset
+- [x] Display character name above the asset (behind Feature Flag)
+- [x] Display bounding box (behind Feature Flag)
 - [ ] Create items: tickets, asteroids, clocks
 - [ ] Create global countdown
 - [ ] Move background during the flight

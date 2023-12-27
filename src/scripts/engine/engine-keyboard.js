@@ -1,5 +1,5 @@
-import { EventEmitter } from './common/event-emitter';
-import { KEYBOARD } from './common/keyboard';
+import { EventEmitter } from './utils/event-emitter';
+import { KEYBOARD } from './utils/keyboard';
 
 const console = {
   log: require('debug')('game:EngineKeyboard:log'),

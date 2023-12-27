@@ -1,6 +1,6 @@
 import { EngineEntity } from './engine-entity.js';
 import { EngineKeyboard } from '../engine-keyboard.js';
-import { KEYBOARD } from '../common/keyboard';
+import { KEYBOARD } from '../utils/keyboard';
 
 export class ArcadeEntity extends EngineEntity {
   deltaMove = 3;
@@ -26,7 +26,18 @@ export class ArcadeEntity extends EngineEntity {
     }
   }
 
-  applyBoundaries(props) {
+  _renderTitle() {
+    const ctx = this.context;
+    const cfg = this.config;
+    ctx.fillStyle = 'rgb(0, 0, 0)';
+    ctx.fillRect(cfg.x, cfg.y - 30, cfg.width, 20);
+
+    ctx.font = '12px Arial';
+    ctx.fillStyle = 'rgb(255, 255, 255)';
+    ctx.fillText(this.config.name, cfg.x + 10, cfg.y - 15);
+  }
+
+  _applyBoundaries(props) {
     let x = props.x || this.x;
     let y = props.y || this.y;
 
@@ -53,8 +64,15 @@ export class ArcadeEntity extends EngineEntity {
   }
 
   moveTo(props) {
-    const protectedPosition = this.applyBoundaries(props);
+    const protectedPosition = this._applyBoundaries(props);
     super.moveTo(protectedPosition);
+  }
+
+  render() {
+    super.render();
+    if (this.config.world.config.isVisiblePlayerTitle) {
+      this._renderTitle();
+    }
   }
 
   onPressLeft() {
@@ -82,10 +100,10 @@ export class ArcadeEntity extends EngineEntity {
   }
 
   onPressAButton() {
-    // console.log('ArcadeEntity: on press A button');
+    // console.log('ArcadeEntity: pressing A button');
   }
 
   onPressBButton() {
-    // console.log('ArcadeEntity: on press B button');
+    // console.log('ArcadeEntity: pressing B button');
   }
 }

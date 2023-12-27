@@ -9,9 +9,12 @@ function main() {
 
   const game = new Game({
     $placeHolder: $area,
-    width: 600,
-    height: 300
+    width: 900,
+    height: 400,
   });
+
+  game.world.config.isVisiblePlayerTitle = true;
+  game.world.config.isVisibleBoundingBox = true;
 
   game.start();
 }
