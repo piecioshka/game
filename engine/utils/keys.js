@@ -1,6 +1,6 @@
 import { Enum } from './enum';
 
-export const KEYBOARD = new Enum({
+export const KEYS = new Enum({
   W: 87,
   D: 68,
   S: 83,

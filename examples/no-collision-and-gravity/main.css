@@ -23,12 +23,6 @@ h1 {
   display: inline-block;
 }
 
-canvas {
-  background: #a7e1fd;
-  border: 1px solid;
-  box-shadow: 0 0 50px 0 #0000003c;
-}
-
 .engine-version {
   font-family: monospace;
   font-size: 12px;

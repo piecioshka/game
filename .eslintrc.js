@@ -18,6 +18,7 @@ module.exports = {
 
   // https://eslint.org/docs/rules/
   rules: {
+    'quotes': ['error', 'single'],
     'no-magic-numbers': 'off',
     'no-use-before-define': 'off',
     'no-console': 'off',

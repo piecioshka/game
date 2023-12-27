@@ -7,6 +7,8 @@
 - ✅ Unlimited players
 - ✅ Independent keyboard controls for each player
 - ✅ Support display bounding box
+- ✅ Scenes (create, switch between)
+- ✅ UI Events on any entity (like player)
 
 ## Preview 🎉
 

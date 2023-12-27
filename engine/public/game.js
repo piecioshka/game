@@ -1,8 +1,10 @@
-import { EngineAssetsLoader } from '../engine/engine-assets-loader';
+import { EngineWorld } from './world';
+import { EngineAssetsLoader } from '../internal/assets-loader';
 
-const console = {
-  log: require('debug')('game:EngineGame:log'),
-};
+// const console = {
+//   log: require('debug')('game:EngineGame:log'),
+//   debug: require('debug')('game:EngineGame:debug'),
+// };
 
 export class EngineGame {
   assets = {};
@@ -13,11 +15,13 @@ export class EngineGame {
     height: 200,
   };
 
-  world = null;
+  /**
+   * @type {EngineWorld}
+   */
+  world = new EngineWorld();
 
-  constructor(settings) {
-    // console.log('new');
-    Object.assign(this.config, settings);
+  constructor(props) {
+    Object.assign(this.config, props);
   }
 
   loop() {
@@ -26,10 +30,10 @@ export class EngineGame {
   }
 
   async start() {
-    // console.log('start');
     this.world.setSize(this.config);
 
     await EngineAssetsLoader.load(this.assets);
+
     this.render();
     this.loop();
   }

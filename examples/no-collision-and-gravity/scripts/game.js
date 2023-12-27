@@ -1,5 +1,7 @@
-import { EngineGame, EngineWorld, KEYBOARD } from '@engine';
-import { Player } from './player';
+import { EngineGame } from '@engine';
+import { IntroScene } from './scenes/intro';
+import { BoardScene } from './scenes/board';
+import { OverScene } from './scenes/over';
 
 export class Game extends EngineGame {
   assets = {
@@ -7,44 +9,15 @@ export class Game extends EngineGame {
     characterB: 'assets/character.png',
   };
 
-  world = null;
-
   constructor(props) {
     super(props);
 
-    const world = this.world = new EngineWorld();
+    const world = this.world;
 
-    const _player = new Player({
-      name: 'Player A',
-      world,
-      assetId: 'characterA',
-      x: 200,
-      y: 120,
-      width: 104,
-      height: 168,
-      controlKeys: {
-        up: KEYBOARD.UP,
-        right: KEYBOARD.RIGHT,
-        down: KEYBOARD.DOWN,
-        left: KEYBOARD.LEFT,
-        a: KEYBOARD.SPACE,
-      },
-    });
-    const _enemy = new Player({
-      name: 'Player B',
-      world,
-      assetId: 'characterB',
-      x: 550,
-      y: 120,
-      width: 104,
-      height: 168,
-      controlKeys: {
-        up: KEYBOARD.W,
-        right: KEYBOARD.D,
-        down: KEYBOARD.S,
-        left: KEYBOARD.A,
-        a: KEYBOARD.X,
-      },
-    });
+    world.addScene('intro', new IntroScene({ world }));
+    world.addScene('board', new BoardScene({ world }));
+    world.addScene('over', new OverScene({ world }));
+
+    world.startScene('intro');
   }
 }

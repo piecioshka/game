@@ -1,19 +1,22 @@
-import { EngineAssetsLoader } from '../engine-assets-loader';
+import { EngineAssetsLoader } from '../internal/assets-loader';
+import { UIEvents } from '../internal/ui-events';
+import { EventEmitter } from '../utils/event-emitter';
 
 const console = {
-  log: require('debug')('game:EngineEntity:log'),
+  log: require('debug')('game:Entity:log'),
+  debug: require('debug')('game:Entity:debug'),
 };
 
-export class EngineEntity {
+export class Entity extends EventEmitter {
   config = {
-    /**
-     * @type {string|null}
-     */
-    name: null,
     /**
      * @type {EngineWorld|null}
      */
     world: null,
+    /**
+     * @type {string|null}
+     */
+    name: null,
     /**
      * @type {string|null}
      */
@@ -22,42 +25,19 @@ export class EngineEntity {
     y: 0,
     width: 0,
     height: 0,
-    controlKeys: {
-      // top
-      // right
-      // down
-      // left
-      // a (special button, like we had in pads)
-      // b (special button, like we had in pads)
-    },
   };
 
-  /**
-   * @type {EngineKeyboard|null}
-   */
-  keyboard = null;
-
-  get x() {
-    return this.config.x;
-  }
-
-  get y() {
-    return this.config.y;
-  }
-
-  get context() {
-    return this.config.world.context;
-  }
+  removeListeners = null;
 
   constructor(props) {
-    // console.log('new');
+    super();
     Object.assign(this.config, props);
-    this.config.world.addItem(this);
-  }
 
-  update() {
-    this.render();
-    this.keyboard.update();
+    this.removeListeners = UIEvents.setup(
+      this.config.world.$canvas,
+      'click',
+      this,
+    );
   }
 
   render() {
@@ -67,6 +47,15 @@ export class EngineEntity {
     this.renderImage();
   }
 
+  update() {
+    this.render();
+  }
+
+  destroy() {
+    // console.debug(`Entity > destroy [${this.config.name}]`);
+    this.removeListeners?.();
+  }
+
   moveTo(props) {
     // console.log('moveTo', props);
     Object.assign(this.config, props);
@@ -74,7 +63,7 @@ export class EngineEntity {
   }
 
   renderBoundingBox() {
-    const ctx = this.context;
+    const ctx = this.config.world.context;
     const cfg = this.config;
     ctx.fillStyle = 'rgba(0, 217, 176, 0.8)';
     ctx.fillRect(cfg.x, cfg.y, cfg.width, cfg.height);
@@ -87,13 +76,12 @@ export class EngineEntity {
     ctx.lineTo(cfg.x, cfg.y + cfg.height);
     ctx.lineTo(cfg.x, cfg.y);
     ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
-    // ctx.strokeStyle = 'red';
     ctx.lineCap = 'square';
     ctx.stroke();
   }
 
   renderImage() {
-    const ctx = this.context;
+    const ctx = this.config.world.context;
     const cfg = this.config;
     const img = EngineAssetsLoader.getLoadedAsset(this.config.assetId);
     ctx.drawImage(img, cfg.x, cfg.y);

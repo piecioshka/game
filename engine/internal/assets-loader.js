@@ -1,9 +1,9 @@
-const EngineAssetsLoader = {
+export const EngineAssetsLoader = {
   assetsLoaded: new Map(),
 
   load(assets) {
     return Promise.all(
-      Object.keys(assets).map((key) => this.loadImage(key, assets[key])),
+      Object.keys(assets).map((key) => this.loadImage(key, assets[key]))
     );
   },
 
@@ -23,5 +23,3 @@ const EngineAssetsLoader = {
     return this.assetsLoaded.get(assetId);
   },
 };
-
-export { EngineAssetsLoader };

@@ -1,10 +1,13 @@
-const console = {
-  log: require('debug')('game:EngineWorld:log'),
-};
+import { SceneManager } from '../internal/scene-manager';
 
-export class EngineWorld {
-  items = [];
+// const console = {
+//   log: require('debug')('game:EngineWorld:log'),
+//   debug: require('debug')('game:EngineWorld:debug'),
+// };
+
+export class EngineWorld extends SceneManager {
   $canvas = document.createElement('canvas');
+
   config = {
     isVisiblePlayerTitle: false,
     isVisibleBoundingBox: false,
@@ -12,10 +15,6 @@ export class EngineWorld {
 
   get context() {
     return this.$canvas.getContext('2d');
-  }
-
-  constructor() {
-    // console.log('new');
   }
 
   get width() {
@@ -27,32 +26,22 @@ export class EngineWorld {
   }
 
   setSize({ width, height }) {
-    // console.log('setSize', width, height);
     this.$canvas.width = width;
     this.$canvas.height = height;
   }
 
-  addItem(item) {
-    this.items.push(item);
-  }
-
   render($target) {
-    // console.log('render');
+    // console.log('EngineWorld > render');
 
     $target.innerHTML = '';
     $target.appendChild(this.$canvas);
 
-    this.items.forEach((item) => {
-      if (item.render) {
-        item.render();
-      }
-    });
+    this.currentScene?.render();
   }
 
   update() {
     // console.log('update');
-    this.context.clearRect(0, 0, this.width, this.height);
-
-    this.items.forEach((item) => item.update?.());
+    this.context?.clearRect(0, 0, this.width, this.height);
+    this.currentScene?.update();
   }
 }

@@ -52,20 +52,20 @@
         "url": "git@github.com:piecioshka/game.git"
     },
     "engines": {
-      "node": ">=18"
+        "node": ">=18"
     },
     "files": [
-      "engine",
-      "package.json",
-      "LICENSE",
-      "README.md"
+        "engine",
+        "package.json",
+        "LICENSE",
+        "README.md"
     ],
     "keywords": [
-      "canvas",
-      "game",
-      "engine",
-      "web",
-      "browser"
+        "canvas",
+        "game",
+        "engine",
+        "web",
+        "browser"
     ],
     "main": "./engine/index.js"
 }
