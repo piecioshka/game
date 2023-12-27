@@ -18,17 +18,17 @@
 - [ ] Create screen: User panel
 - [ ] Create screen: Game over
 
-## Features
+## Scenes
 
-- [ ] Ekran: Intro Wpisz
+- [ ] Scene: Intro Wpisz
   - username
   - unikalny token, aby móc zweryfikować Twoje konto, dzięki temu, nie musisz podawać maila
   - [ ] Przechowywać dane w localStorage
   - [ ] Firebase: Stworzyć nowy wpis w rankingu
-- [ ] Ekran: Panel użytkownika
+- [ ] Scene: Panel użytkownika
   - [ ] Wyświetlać dane z localStorage
   - [ ] (Opcjonalnie) Dać możliwość zmiany username
-- [ ] Ekran: Gra
+- [ ] Scene: Gra
   - [ ] Leci rakieta od dołu do góry
   - [ ] Czas ciągle maleje (countdown)
   - [ ] Poziomy trudności
@@ -37,6 +37,6 @@
       - [ ] Dodanie czasu do ogólnego
     - [ ] Pojawiają się bilety na konferencję
       - [ ] Zwykłe punkty
-- [ ] Ekran: Koniec gry
+- [ ] Scene: Koniec gry
   - [ ] Pojawia się, gdy zmniejszający czas osiąga wartość 0
   - [ ] Firebase: Zapisać / Zaktualizować stan gry w rankingu
