@@ -1,4 +1,4 @@
-import { ArcadeEntity } from '../engine/game-types/arcade-entity';
+import { ArcadeEntity } from '@engine';
 
 export class Player extends ArcadeEntity {
   onPressAButton() {

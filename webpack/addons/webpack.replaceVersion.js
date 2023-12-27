@@ -9,7 +9,7 @@ module.exports = {
         test: /\.html$/,
         loader: 'string-replace-loader',
         options: {
-          search: '{{game.version}}',
+          search: '{{engine.version}}',
           replace: pkg.version,
         },
       },

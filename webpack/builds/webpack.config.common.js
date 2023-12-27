@@ -7,12 +7,18 @@ const merge = require('webpack-merge');
 module.exports = (env) => {
   let config = {
     entry: {
-      main: path.join(root, 'src', 'main'),
+      'no-collision-and-gravity': path.join(root, 'examples', 'no-collision-and-gravity', 'main'),
     },
 
     output: {
-      filename: 'main.js',
+      filename: '[name]/main.js',
       path: path.join(root, 'dist'),
+    },
+
+    resolve: {
+      alias: {
+        '@engine': path.join(root, 'engine')
+      },
     },
 
     module: {
@@ -32,7 +38,7 @@ module.exports = (env) => {
           exclude: /node_modules/,
           loader: 'file-loader',
           options: {
-            name: '[name].[ext]',
+            name: '[folder]/[name].[ext]',
           },
         },
       ],

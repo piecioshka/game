@@ -1,6 +1,6 @@
-import { EngineGame } from '../engine/engine-game';
-import { EngineWorld } from '../engine/engine-world';
-import { KEYBOARD } from '../engine/utils/keyboard';
+import { EngineGame } from '@engine';
+import { EngineWorld } from '@engine';
+import { KEYBOARD } from '@engine';
 import { Player } from './player';
 
 export class Game extends EngineGame {
@@ -20,8 +20,8 @@ export class Game extends EngineGame {
       name: 'Player A',
       world,
       assetId: 'characterA',
-      x: 100,
-      y: 100,
+      x: 200,
+      y: 120,
       width: 104,
       height: 168,
       controlKeys: {
@@ -36,8 +36,8 @@ export class Game extends EngineGame {
       name: 'Player B',
       world,
       assetId: 'characterB',
-      x: 400,
-      y: 100,
+      x: 550,
+      y: 120,
       width: 104,
       height: 168,
       controlKeys: {

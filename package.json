@@ -15,6 +15,7 @@
         "lint": "eslint .",
         "predeploy": "npm run clear && npm run build:production",
         "deploy": "NODE_DEBUG=gh-pages gh-pages -d dist/",
+        "prebuild": "npm run clear",
         "build": "npm run build:development",
         "build:development": "webpack --config webpack/builds/webpack.config.dev.js --env addons=replaceVersion,copyAssets",
         "build:production": "webpack --config webpack/builds/webpack.config.prod.js --env addons=replaceVersion,copyAssets",

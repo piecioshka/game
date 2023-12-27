@@ -1,11 +1,11 @@
 # game
 
-:video_game: Simple 2D Game Engine
+:video_game: Canvas 2D Game Engine
 
 ## Features
 
-- ✅ Create players (infinite number)
-- ✅ Set independent keyboard controls for each player
+- ✅ Unlimited players
+- ✅ Independent keyboard controls for each player
 - ✅ Support display bounding box
 
 ## Examples 🎉
