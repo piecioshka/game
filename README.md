@@ -8,9 +8,13 @@
 - ✅ Independent keyboard controls for each player
 - ✅ Support display bounding box
 
-## Examples 🎉
+## Preview 🎉
 
-- <https://piecioshka.github.io/game/>
+<https://piecioshka.github.io/game/>
+
+## Examples
+
+- <https://piecioshka.github.io/game/no-collision-and-gravity>
 
 ## License
 
