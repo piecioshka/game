@@ -18,7 +18,7 @@ module.exports = {
 
   // https://eslint.org/docs/rules/
   rules: {
-    'quotes': ['error', 'single'],
+    quotes: ['error', 'single'],
     'no-magic-numbers': 'off',
     'no-use-before-define': 'off',
     'no-console': 'off',
@@ -32,6 +32,7 @@ module.exports = {
     'lines-around-comment': 'off',
     'no-unused-vars': 'off',
     'no-unused-expressions': 'off',
+    'no-sync': 'off',
   },
 
   // List of global variables.

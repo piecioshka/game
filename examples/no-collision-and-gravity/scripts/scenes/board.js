@@ -5,9 +5,9 @@ export class BoardScene extends EngineScene {
   setup() {
     const world = this.config.world;
 
-    setTimeout(() => {
-      world.startScene('over');
-    }, 3000);
+    // setTimeout(() => {
+    //   world.startScene('over');
+    // }, 3000);
 
     const player = new Player({
       world,

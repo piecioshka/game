@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -29,10 +30,6 @@ h1 {
   color: #fff;
   background: #335c82;
   padding: 4px 8px;
-  border-radius: 2px;
-  border: 1px solid #000;
-  position: absolute;
-  right: -30px;
-  bottom: -5px;
-  transform: rotate(-10deg);
+  border-bottom: 1px solid #000;
+  font-style: italic;
 }
