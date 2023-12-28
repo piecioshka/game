@@ -7,4 +7,5 @@ export * from './entities/entity';
 
 export * from './utils/keys';
 
-export * from './views/top-down';
+export * from './views/side-view';
+export * from './views/top-down-view';

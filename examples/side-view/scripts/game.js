@@ -1,4 +1,4 @@
-import { EngineGame, EngineTopDownView } from '@engine';
+import { EngineGame, EngineSideView } from '@engine';
 import { BoardScene } from './board';
 
 export class Game extends EngineGame {
@@ -12,7 +12,7 @@ export class Game extends EngineGame {
 
     const world = this.world;
 
-    const viewType = new EngineTopDownView();
+    const viewType = new EngineSideView();
 
     world.addScene('board', new BoardScene({ world, viewType }));
 
