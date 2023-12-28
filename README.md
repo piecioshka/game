@@ -6,9 +6,10 @@
 
 - ✅ Unlimited players
 - ✅ Independent keyboard controls for each player
-- ✅ Support display bounding box
-- ✅ Scenes (create, switch between)
+- ✅ Display Bounding Box of all entities
+- ✅ Scenes (create, switch)
 - ✅ UI Events on any entity (like player)
+- ✅ View Types: Top Down
 
 ## Preview 🎉
 
@@ -16,7 +17,8 @@
 
 ## Examples
 
-- <https://piecioshka.github.io/game/top-down-view>
+- <https://piecioshka.github.io/game/top-down-view/>
+- <https://piecioshka.github.io/game/side-view/>
 
 ## License
 

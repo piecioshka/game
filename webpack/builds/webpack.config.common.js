@@ -8,6 +8,7 @@ module.exports = (env) => {
   let config = {
     entry: {
       'top-down-view': path.join(root, 'examples', 'top-down-view', 'main'),
+      'side-view': path.join(root, 'examples', 'side-view', 'main'),
     },
 
     output: {

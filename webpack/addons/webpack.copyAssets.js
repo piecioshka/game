@@ -11,6 +11,10 @@ module.exports = {
           to: 'top-down-view/assets',
         },
         {
+          from: 'examples/side-view/assets/',
+          to: 'side-view/assets',
+        },
+        {
           from: 'examples/index.html',
           to: 'index.html',
         },
