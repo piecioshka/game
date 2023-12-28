@@ -1,11 +1,10 @@
-import { EngineScene, KEYS } from '@engine';
-import { Player } from './player';
+import { EngineScene, ArcadeEntity, KEYS } from '@engine';
 
 export class BoardScene extends EngineScene {
   setup() {
     const { world, viewType } = this.config;
 
-    const player = new Player({
+    const player = new ArcadeEntity({
       world,
       viewType,
       name: 'Player',

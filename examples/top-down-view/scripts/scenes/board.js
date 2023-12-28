@@ -1,5 +1,4 @@
-import { EngineScene, KEYS } from '@engine';
-import { Player } from '../player';
+import { EngineScene, ArcadeEntity, KEYS } from '@engine';
 
 export class BoardScene extends EngineScene {
   setup() {
@@ -9,7 +8,7 @@ export class BoardScene extends EngineScene {
     //   world.startScene('over');
     // }, 3000);
 
-    const player = new Player({
+    const player = new ArcadeEntity({
       world,
       viewType,
       name: 'Player',
@@ -30,7 +29,7 @@ export class BoardScene extends EngineScene {
     });
     this.addEntity(player);
 
-    const enemy = new Player({
+    const enemy = new ArcadeEntity({
       world,
       viewType,
       name: 'Enemy',
