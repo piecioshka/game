@@ -12,7 +12,9 @@ export class Game extends EngineGame {
 
     const world = this.world;
 
-    const viewType = new EngineSideView();
+    const viewType = new EngineSideView({
+      gravity: 1,
+    });
 
     world.addScene('board', new BoardScene({ world, viewType }));
 

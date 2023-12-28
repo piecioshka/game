@@ -53,6 +53,7 @@ export class Entity extends EventEmitter {
   update() {
     // console.debug(`Entity > update [${this.config.name}]`);
     this.render();
+    this.config.viewType?.update?.(this);
   }
 
   destroy() {

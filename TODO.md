@@ -13,9 +13,10 @@
 - [x] Destroy entities
 - [x] UI Events on entities
 - [x] Scenes
-- [x] Views: TopDown
-- [ ] Views: SideView
-- [ ] Gravity
+- [x] Views: Top Down View
+- [ ] Views: Side View
+- [x] Gravity
+- [ ] Jumping
 - [ ] Collisions
 - [ ] Map
 

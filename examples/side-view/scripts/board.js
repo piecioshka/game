@@ -9,8 +9,8 @@ export class BoardScene extends EngineScene {
       viewType,
       name: 'Player',
       assetId: 'characterA',
-      x: 200,
-      y: 120,
+      x: 100,
+      y: -104,
       width: 104,
       height: 168,
 
