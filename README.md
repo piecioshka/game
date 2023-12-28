@@ -9,7 +9,8 @@
 - ✅ Display Bounding Box of all entities
 - ✅ Scenes (create, switch)
 - ✅ UI Events on any entity (like player)
-- ✅ View Types: Top Down (Gravity)
+- ✅ View Types: Top Down View
+- ✅ View Types: Side View (gravity, jumping)
 
 ## Preview 🎉
 

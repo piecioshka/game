@@ -14,6 +14,7 @@ export class Game extends EngineGame {
 
     const viewType = new EngineSideView({
       gravity: 1,
+      jump: 3,
     });
 
     world.addScene('board', new BoardScene({ world, viewType }));

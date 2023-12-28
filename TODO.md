@@ -14,9 +14,9 @@
 - [x] UI Events on entities
 - [x] Scenes
 - [x] Views: Top Down View
-- [ ] Views: Side View
-- [x] Gravity
-- [ ] Jumping
+- [x] Views: Side View
+  - [x] Gravity
+  - [x] Jumping
 - [ ] Collisions
 - [ ] Map
 
