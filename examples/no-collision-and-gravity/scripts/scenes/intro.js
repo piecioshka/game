@@ -16,6 +16,6 @@ export class IntroScene extends EngineScene {
 
   update() {
     // console.debug('IntroScene > update');
-    this.setBackgroundColor('#a7e1fd');
+    this.setBackgroundColor('#3d98c9');
   }
 }

@@ -3,7 +3,7 @@ import { Player } from '../player';
 
 export class BoardScene extends EngineScene {
   setup() {
-    const world = this.config.world;
+    const { world, viewType } = this.config;
 
     // setTimeout(() => {
     //   world.startScene('over');
@@ -11,12 +11,15 @@ export class BoardScene extends EngineScene {
 
     const player = new Player({
       world,
+      viewType,
       name: 'Player',
       assetId: 'characterA',
       x: 200,
       y: 120,
       width: 104,
       height: 168,
+
+      deltaMove: 5,
       controlKeys: {
         up: KEYS.UP,
         right: KEYS.RIGHT,
@@ -25,17 +28,19 @@ export class BoardScene extends EngineScene {
         a: KEYS.SPACE,
       },
     });
-
     this.addEntity(player);
 
     const enemy = new Player({
       world,
+      viewType,
       name: 'Enemy',
       assetId: 'characterB',
       x: 550,
       y: 120,
       width: 104,
       height: 168,
+
+      deltaMove: 3,
       controlKeys: {
         up: KEYS.W,
         right: KEYS.D,

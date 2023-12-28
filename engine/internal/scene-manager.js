@@ -1,17 +1,21 @@
 export class SceneManager {
-  scenes = [];
   /**
-   * @type {EngineScene|null}
+   * @type {import('../domain/scene').EngineScene[]}
+   */
+  #scenes = [];
+
+  /**
+   * @type {import('../domain/scene').EngineScene|null}
    */
   currentScene = null;
 
   /**
    * @param {string} name
-   * @param {EngineScene} scene
+   * @param {import('../domain/scene').EngineScene} scene
    */
   addScene(name, scene) {
     // console.debug(`[💾] SceneManager > addScene [${name}]`);
-    this.scenes[name] = scene;
+    this.#scenes[name] = scene;
   }
 
   /**
@@ -20,7 +24,7 @@ export class SceneManager {
   startScene(name) {
     this.currentScene?.destroy();
     // console.debug(`[🚀] SceneManager > startScene [${name}]`);
-    this.currentScene = this.scenes[name];
-    this.currentScene.setup?.();
+    this.currentScene = this.#scenes[name];
+    this.currentScene?.setup?.();
   }
 }

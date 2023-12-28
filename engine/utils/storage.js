@@ -7,6 +7,7 @@ export const Storage = {
       console.error(err);
     }
   },
+
   read(key) {
     try {
       const value = localStorage.getItem(key);
@@ -16,6 +17,7 @@ export const Storage = {
       return null;
     }
   },
+
   update(key, val) {
     this.create(key, val);
   },

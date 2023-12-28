@@ -6,11 +6,15 @@ export class EngineScene extends EntitiesManager {
      * @type {import('./world').EngineWorld|null}
      */
     world: null,
+    /**
+     * @type {import('../views/view').EngineView|null}
+     */
+    viewType: null,
   };
 
   constructor(props) {
     super();
-    this.config.world = props.world;
+    Object.assign(this.config, props);
   }
 
   setBackgroundColor(color) {

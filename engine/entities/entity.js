@@ -5,9 +5,13 @@ import { EventEmitter } from '../utils/event-emitter';
 export class Entity extends EventEmitter {
   config = {
     /**
-     * @type {EngineWorld|null}
+     * @type {import('../domain/world').EngineWorld|null}
      */
     world: null,
+    /**
+     * @type {import('../views/view').EngineView|null}
+     */
+    viewType: null,
     /**
      * @type {string|null}
      */
@@ -22,35 +26,17 @@ export class Entity extends EventEmitter {
     height: 0,
   };
 
+  /**
+   * @type {() => void|null}
+   */
   removeListeners = null;
-
-  // TODO(piecioshka): this is only for optimisation
-  get x() {
-    return this.config.x;
-  }
-
-  get y() {
-    return this.config.y;
-  }
-
-  get width() {
-    return this.config.width;
-  }
-
-  get height() {
-    return this.config.height;
-  }
-
-  get context() {
-    return this.config.world.context;
-  }
 
   constructor(props) {
     super();
     Object.assign(this.config, props);
 
     this.removeListeners = UIEvents.setup(
-      this.config.world.$canvas,
+      this.config.world?.$canvas,
       'click',
       this,
     );
@@ -58,7 +44,7 @@ export class Entity extends EventEmitter {
 
   render() {
     // console.debug(`Entity > render [${this.config.name}]`);
-    if (this.config.world.config.isVisibleBoundingBox) {
+    if (this.config.world?.config.isVisibleBoundingBox) {
       this.renderBoundingBox();
     }
     this.renderImage();
@@ -74,19 +60,25 @@ export class Entity extends EventEmitter {
     this.removeListeners?.();
   }
 
+  /**
+   * @param {{ x?: number, y?: number }} param0
+   */
   moveTo({ x, y }) {
-    // console.log('Entity > moveTo', props);
-    if (x) {
+    // console.log('Entity > moveTo', { x, y });
+    if (typeof x === 'number') {
       this.config.x = x;
     }
-    if (y) {
+    if (typeof y === 'number') {
       this.config.y = y;
     }
   }
 
   renderBoundingBox() {
-    const ctx = this.context;
     const cfg = this.config;
+    const ctx = cfg.world?.context;
+    if (!ctx) {
+      return;
+    }
     ctx.fillStyle = 'rgba(0, 217, 176, 0.8)';
     ctx.fillRect(cfg.x, cfg.y, cfg.width, cfg.height);
 
@@ -103,8 +95,11 @@ export class Entity extends EventEmitter {
   }
 
   renderImage() {
-    const ctx = this.context;
     const cfg = this.config;
+    const ctx = cfg.world?.context;
+    if (!ctx) {
+      return;
+    }
     const img = EngineAssetsLoader.getLoadedAsset(cfg.assetId);
     if (img) {
       ctx.drawImage(img, cfg.x, cfg.y);

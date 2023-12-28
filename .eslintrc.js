@@ -33,6 +33,8 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-unused-expressions': 'off',
     'no-sync': 'off',
+    'max-statements': 'off',
+    'valid-jsdoc': 'off',
   },
 
   // List of global variables.
