@@ -11,7 +11,7 @@ function main() {
     height: 400,
   });
 
-  game.world.config.isVisiblePlayerTitle = true;
+  game.world.config.isVisiblePlayerLabel = true;
   game.world.config.isVisibleBoundingBox = true;
 
   game.start();

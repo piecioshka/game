@@ -36,6 +36,7 @@ export class Entity extends EventEmitter {
   }
 
   render() {
+    // console.debug(`Entity > render [${this.config.name}]`);
     if (this.config.world.config.isVisibleBoundingBox) {
       this.renderBoundingBox();
     }
@@ -43,6 +44,7 @@ export class Entity extends EventEmitter {
   }
 
   update() {
+    // console.debug(`Entity > update [${this.config.name}]`);
     this.render();
   }
 
@@ -51,10 +53,14 @@ export class Entity extends EventEmitter {
     this.removeListeners?.();
   }
 
-  moveTo(props) {
-    // console.log('moveTo', props);
-    Object.assign(this.config, props);
-    this.render();
+  moveTo({ x, y }) {
+    // console.log('Entity > moveTo', props);
+    if (x) {
+      this.config.x = x;
+    }
+    if (y) {
+      this.config.y = y;
+    }
   }
 
   renderBoundingBox() {
@@ -79,6 +85,8 @@ export class Entity extends EventEmitter {
     const ctx = this.config.world.context;
     const cfg = this.config;
     const img = EngineAssetsLoader.getLoadedAsset(this.config.assetId);
-    ctx.drawImage(img, cfg.x, cfg.y);
+    if (img) {
+      ctx.drawImage(img, cfg.x, cfg.y);
+    }
   }
 }

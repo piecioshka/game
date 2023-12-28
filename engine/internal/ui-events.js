@@ -15,7 +15,7 @@ export const UIEvents = {
       // console.debug('UIEvents', entityName, { eventName, isOverlaps });
 
       if (isOverlaps) {
-        // console.debug(`[🔥] Emit "${eventName}" on "${entityName}"`);
+        console.debug(`[🔥] Emit "${eventName}" on "${entityName}"`);
         entity.emit(eventName);
       }
     };

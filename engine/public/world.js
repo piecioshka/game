@@ -4,7 +4,7 @@ export class EngineWorld extends SceneManager {
   $canvas = document.createElement('canvas');
 
   config = {
-    isVisiblePlayerTitle: false,
+    isVisiblePlayerLabel: false,
     isVisibleBoundingBox: false,
   };
 
@@ -35,7 +35,7 @@ export class EngineWorld extends SceneManager {
   }
 
   update() {
-    // console.log('update');
+    // console.log('EngineWorld > update');
     this.context?.clearRect(0, 0, this.width, this.height);
     this.currentScene?.update();
   }

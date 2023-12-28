@@ -14,7 +14,7 @@ export const EngineAssetsLoader = {
         this.assetsLoaded.set(key, img);
         resolve(img);
       };
-      img.onerror = () => reject();
+      img.onerror = (reason) => reject(reason);
       img.src = url;
     });
   },

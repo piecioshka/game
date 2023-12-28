@@ -13,7 +13,7 @@ export class EngineKeyboard extends EventEmitter {
   }
 
   _handleKeyboardEvents() {
-    console.debug('EngineKeyboard > _handleKeyboardEvents');
+    // console.debug('EngineKeyboard > _handleKeyboardEvents');
     const keys = this.#pressKeys;
 
     /**
@@ -46,7 +46,7 @@ export class EngineKeyboard extends EventEmitter {
   }
 
   destroy() {
-    console.debug('EngineKeyboard > destroy');
+    // console.debug('EngineKeyboard > destroy');
     this.#pressKeys.clear();
     this.destroyListeners?.();
   }

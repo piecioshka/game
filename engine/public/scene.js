@@ -21,7 +21,7 @@ export class EngineScene extends EntitiesManager {
   }
 
   setup() {
-    this.runOnAllEntities('setup');
+    // [to be implement in inherited classes]
   }
 
   render() {

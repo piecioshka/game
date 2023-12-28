@@ -28,7 +28,7 @@ export class ArcadeEntity extends Entity {
   }
 
   _setupBindings() {
-    console.debug(`ArcadeEntity > _setupBindings [${this.config.name}]`);
+    // console.debug(`ArcadeEntity > _setupBindings [${this.config.name}]`);
     const { up, right, down, left, a, b } = this.controlKeys;
 
     const map = new Map([
@@ -48,7 +48,7 @@ export class ArcadeEntity extends Entity {
     });
   }
 
-  _renderTitle() {
+  _renderLabel() {
     const ctx = this.config.world.context;
     const cfg = this.config;
     ctx.fillStyle = 'rgb(0, 0, 0)';
@@ -92,8 +92,8 @@ export class ArcadeEntity extends Entity {
 
   render() {
     super.render();
-    if (this.config.world.config.isVisiblePlayerTitle) {
-      this._renderTitle();
+    if (this.config.world.config.isVisiblePlayerLabel) {
+      this._renderLabel();
     }
   }
 

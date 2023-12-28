@@ -27,19 +27,23 @@ export class EngineGame {
   async start() {
     this.world.setSize(this.config);
 
-    await EngineAssetsLoader.load(this.assets);
+    try {
+      await EngineAssetsLoader.load(this.assets);
+    } catch (err) {
+      // TODO(piecioshka): handle missing asset
+    }
 
     this.render();
     this.loop();
   }
 
   render() {
-    // console.log('render');
+    // console.log('EngineGame > render');
     this.world.render(this.config.$placeHolder);
   }
 
   update() {
-    // console.log('update');
+    // console.log('EngineGame > update');
     this.world.update();
   }
 }
