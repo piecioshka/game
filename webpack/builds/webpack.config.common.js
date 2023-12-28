@@ -7,7 +7,7 @@ const merge = require('webpack-merge');
 module.exports = (env) => {
   let config = {
     entry: {
-      'no-collision-and-gravity': path.join(root, 'examples', 'no-collision-and-gravity', 'main'),
+      'top-down-view': path.join(root, 'examples', 'top-down-view', 'main'),
     },
 
     output: {

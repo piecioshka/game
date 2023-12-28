@@ -16,7 +16,7 @@
 
 ## Examples
 
-- <https://piecioshka.github.io/game/no-collision-and-gravity>
+- <https://piecioshka.github.io/game/top-down-view>
 
 ## License
 

@@ -25,7 +25,7 @@
 - [ ] Move background during the flight
 - [ ] Create entities: asteroids, tickets, clocks
 
-## Example Game "no-collision-and-gravity"
+## Example Game "top-down-view"
 
 - [ ] Uwierzytelnianie GitHubem
   - unikalny token, aby móc zweryfikować Twoje konto, dzięki temu, nie musisz podawać maila

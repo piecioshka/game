@@ -7,8 +7,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'examples/no-collision-and-gravity/assets/',
-          to: 'no-collision-and-gravity/assets',
+          from: 'examples/top-down-view/assets/',
+          to: 'top-down-view/assets',
         },
         {
           from: 'examples/index.html',
