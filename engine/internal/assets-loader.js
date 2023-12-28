@@ -3,15 +3,17 @@ export const EngineAssetsLoader = {
 
   load(assets) {
     return Promise.all(
-      Object.keys(assets).map((key) => this.loadImage(key, assets[key]))
+      Object.keys(assets).map((assetId) =>
+        this.loadImage(assetId, assets[assetId]),
+      ),
     );
   },
 
-  loadImage(key, url) {
+  loadImage(assetId, url) {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => {
-        this.assetsLoaded.set(key, img);
+        this.assetsLoaded.set(assetId, img);
         resolve(img);
       };
       img.onerror = (reason) => reject(reason);

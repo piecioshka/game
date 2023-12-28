@@ -1,8 +1,8 @@
 export * from './entities/arcade-entity';
 export * from './entities/entity';
 
-export * from './public/game';
-export * from './public/scene';
-export * from './public/world';
+export * from './domain/game';
+export * from './domain/scene';
+export * from './domain/world';
 
 export * from './utils/keys';
