@@ -1,8 +1,8 @@
 export class EntitiesManager {
   #entities = [];
 
-  addEntity(item) {
-    this.#entities.push(item);
+  addEntity(entity) {
+    this.#entities.push(entity);
   }
 
   destroyEntities() {
@@ -10,7 +10,8 @@ export class EntitiesManager {
   }
 
   runOnAllEntities(methodName) {
-    this.#entities.forEach((item) => item[methodName]?.());
+    // console.debug('EntitiesManager > runOnAllEntities', { methodName });
+    this.#entities.forEach((entity) => entity[methodName]?.());
 
     // const size = this.#entities.length;
 
@@ -18,8 +19,8 @@ export class EntitiesManager {
     //   this.#entities[i][methodName]?.();
     // }
 
-    // for (let item of this.#entities) {
-    //   item[methodName]?.();
+    // for (let entity of this.#entities) {
+    //   entity[methodName]?.();
     // }
   }
 }

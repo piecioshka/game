@@ -1,12 +1,12 @@
 export const UIEvents = {
   setup(canvas, eventName, entity) {
     const entityName = entity.config.name;
-    const { x, y, width, height } = entity.config;
     // console.debug(`[⚙️] Setup "${eventName}" on "${entityName}"`);
 
     const handler = function (evt) {
       const clickedX = evt.offsetX;
       const clickedY = evt.offsetY;
+      const { x, y, width, height } = entity.config;
 
       const isInHorizontalRange = x < clickedX && x + width > clickedX;
       const isInVerticalRange = y < clickedY && y + height > clickedY;

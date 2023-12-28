@@ -24,6 +24,27 @@ export class Entity extends EventEmitter {
 
   removeListeners = null;
 
+  // TODO(piecioshka): this is only for optimisation
+  get x() {
+    return this.config.x;
+  }
+
+  get y() {
+    return this.config.y;
+  }
+
+  get width() {
+    return this.config.width;
+  }
+
+  get height() {
+    return this.config.height;
+  }
+
+  get context() {
+    return this.config.world.context;
+  }
+
   constructor(props) {
     super();
     Object.assign(this.config, props);
@@ -64,7 +85,7 @@ export class Entity extends EventEmitter {
   }
 
   renderBoundingBox() {
-    const ctx = this.config.world.context;
+    const ctx = this.context;
     const cfg = this.config;
     ctx.fillStyle = 'rgba(0, 217, 176, 0.8)';
     ctx.fillRect(cfg.x, cfg.y, cfg.width, cfg.height);
@@ -82,9 +103,9 @@ export class Entity extends EventEmitter {
   }
 
   renderImage() {
-    const ctx = this.config.world.context;
+    const ctx = this.context;
     const cfg = this.config;
-    const img = EngineAssetsLoader.getLoadedAsset(this.config.assetId);
+    const img = EngineAssetsLoader.getLoadedAsset(cfg.assetId);
     if (img) {
       ctx.drawImage(img, cfg.x, cfg.y);
     }

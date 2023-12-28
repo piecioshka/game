@@ -47,6 +47,11 @@ export class BoardScene extends EngineScene {
     this.addEntity(enemy);
   }
 
+  render() {
+    // console.debug('BoardScene > render');
+    super.render();
+  }
+
   update() {
     // console.debug('BoardScene > update');
     this.setBackgroundColor('#a7e1fd');

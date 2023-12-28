@@ -60,28 +60,30 @@ export class ArcadeEntity extends Entity {
   }
 
   _applyBoundaries(props) {
-    let x = props.x || this.config.x;
-    let y = props.y || this.config.y;
+    let x = props.x || this.x;
+    let y = props.y || this.y;
+    const world = this.config.world;
 
     // LEFT
     if (x < 0) {
       x = 0;
+    } else
+
+    // RIGHT
+    if (x + this.width > world.width) {
+      x = world.width - this.width;
     }
 
     // UP
     if (y < 0) {
       y = 0;
-    }
-
-    // RIGHT
-    if (x + this.config.width > this.config.world.width) {
-      x = this.config.world.width - this.config.width;
-    }
+    } else
 
     // DOWN
-    if (y + this.config.height > this.config.world.height) {
-      y = this.config.world.height - this.config.height;
+    if (y + this.height > world.height) {
+      y = world.height - this.height;
     }
+
     return { x, y };
   }
 
@@ -109,25 +111,25 @@ export class ArcadeEntity extends Entity {
 
   onPressLeft() {
     this.moveTo({
-      x: this.config.x - this.deltaMove,
+      x: this.x - this.deltaMove,
     });
   }
 
   onPressRight() {
     this.moveTo({
-      x: this.config.x + this.deltaMove,
+      x: this.x + this.deltaMove,
     });
   }
 
   onPressUp() {
     this.moveTo({
-      y: this.config.y - this.deltaMove,
+      y: this.y - this.deltaMove,
     });
   }
 
   onPressDown() {
     this.moveTo({
-      y: this.config.y + this.deltaMove,
+      y: this.y + this.deltaMove,
     });
   }
 

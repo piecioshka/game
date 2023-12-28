@@ -1,6 +1,6 @@
 import { EngineScene, Entity } from '@engine';
 
-export class OverScene extends EngineScene {
+export class GameOverScene extends EngineScene {
   setup() {
     const world = this.config.world;
 
@@ -21,7 +21,13 @@ export class OverScene extends EngineScene {
     this.addEntity(restartButton);
   }
 
+  render() {
+    // console.debug('GameOverScene > render');
+    super.render();
+  }
+
   update() {
+    // console.debug('GameOverScene > update');
     this.setBackgroundColor('#293d51');
     super.update();
   }

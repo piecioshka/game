@@ -9,7 +9,13 @@ export class IntroScene extends EngineScene {
     }, 1000);
   }
 
+  render() {
+    // console.debug('IntroScene > render');
+    super.render();
+  }
+
   update() {
+    // console.debug('IntroScene > update');
     this.setBackgroundColor('#a7e1fd');
   }
 }
