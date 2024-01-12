@@ -35,7 +35,7 @@ export class BoardScene extends EngineScene {
       width: 66,
       height: 66,
 
-      deltaMove: 5,
+      deltaMove: 3,
     });
 
     this.addEntity(enemy);

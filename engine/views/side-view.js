@@ -22,7 +22,7 @@ export class EngineSideView extends EngineView {
 
     if (!isOnTheBottom) {
       entity.moveTo({
-        y: y + (worldHeight * gravity) / 100,
+        y: y + ((worldHeight - height) * gravity) / 100,
       });
     }
   }
@@ -61,6 +61,7 @@ export class EngineSideView extends EngineView {
   }
 
   #jump(entity) {
+    const jump = this.config.jump;
     const { y, height } = entity.config;
 
     if (y + height < worldHeight) {
@@ -69,7 +70,7 @@ export class EngineSideView extends EngineView {
     }
 
     this._updatePosition(entity, {
-      y: y - ((worldHeight - height) * this.config.jump) / 100,
+      y: y - ((worldHeight - height) * jump) / 100,
     });
   }
 }
