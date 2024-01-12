@@ -1,49 +1,67 @@
-# TODO
+# List of features to be implemented
 
 ## Engine
 
-- [x] Create game object
-- [x] Create world object
-- [x] Create entities
-- [x] Create player
-- [x] Move player with LEFT, RIGHT arrows on keyboard
-- [x] Support different keys controls for each character on board
-- [x] Display character name above the asset (behind Feature Flag)
-- [x] Display bounding box (behind Feature Flag)
-- [x] Destroy entities
-- [x] UI Events on entities
+- [x] Game
+  - [x] Create
+  - [x] Initiate the game loop
+- [x] World
+  - [x] Create
+  - [x] Render a canvas
+- [x] Entity
+  - [x] Create
+  - [x] Set position
+  - [x] Render image
+  - [x] Display character label above the asset
+  - [x] Display bounding box
+  - [x] Destroy entities
+  - [x] UI Events on entities
+- [x] Arcade entity (like player)
+  - [x] Create
+- [ ] Controlling: with keyboard
+  - [x] Support different keys controls for each character on board
+  - [ ] Auto-moving by computer
 - [x] Scenes
+  - Switching between them
 - [x] Views: Top Down View
 - [x] Views: Side View
   - [x] Gravity
   - [x] Jumping
 - [ ] Collisions
+  - Support defining handle for resolving collision
+- [ ] Countdown
+  - [ ] Create
+  - [ ] Start / pause / stop
+- [ ] Load sprite
+  - Change image during rendering entity
 - [ ] Map
-
-## Bonus
-
-- [ ] Create global countdown
-- [ ] Move background during the flight
-- [ ] Create entities: asteroids, tickets, clocks
 
 ## Example Game "top-down-view"
 
-- [ ] Uwierzytelnianie GitHubem
-  - unikalny token, aby móc zweryfikować Twoje konto, dzięki temu, nie musisz podawać maila
-  - [ ] Przechowywać dane w localStorage
-
 - [x] Scene: Intro z obrazkiem powitalnym
 
-- [ ] Scene: Gra
-  - [ ] Leci rakieta od dołu do góry
+- [ ] Scene: Plansza
+  - [ ] Lecisz rakietą od dołu do góry
   - [ ] Czas ciągle maleje (countdown)
     - [ ] Gdy czas osiąga wartość 0 to "Game Over"
   - [ ] Pojawiają się asteroidy
-    - [ ] Uderzenie w nie powoduje, że się ginie i jest "Game Over"
+    - [ ] Uderzenie w nie powoduje, że się ginie i "Game Over"
   - [ ] Pojawiają się zegarki
-    - [ ] Dodanie czasu do ogólnego
-  - [ ] Pojawiają się bilety na konferencję
-    - [ ] Zwykłe punkty
+    - [ ] Dodanie czasu do głównego zegara
+  - [ ] Pojawiają się diamenty
+    - [ ] Po kolizji z nimi, dodają Ci się punkty
   - [ ] Zmiana kolorystyczna (fiolet, zielony, pomarańczowy, czerwony)
 
-- [ ] Scene: Game Over / Koniec gry
+- [ ] Scene: Game Over
+
+## Example Game "side-view"
+
+- [ ] Scene: Plansza
+  - [ ] Chodzisz postacią i zbierać grzybki
+  - [ ] Czas ciągle maleje (countdown)
+    - [ ] Gdy czas osiąga wartość 0 to "Game Over"
+  - [ ] Pojawiają się wrogowie
+    - [ ] Dotknięcie nich powoduje, że się ginie i "Game Over"
+  - [ ] Możesz skoczyć na murek
+
+- [ ] Scene: Game Over
