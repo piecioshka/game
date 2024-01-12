@@ -27,11 +27,11 @@ export class EngineView {
     // [to be implemented in inherited class]
   }
 
-  _applyBoundaries(entity, props) {
+  _applyWorldBoundaries(entity, props) {
     const cfg = entity.config;
     let x = props.x ?? cfg.x;
     let y = props.y ?? cfg.y;
-    // console.debug('EngineView > _applyBoundaries', { x, y });
+    // console.debug('EngineView > _applyWorldBoundaries', { x, y });
     const world = cfg.world;
     const entityWidth = cfg.width;
     const entityHeight = cfg.height;

@@ -34,11 +34,23 @@ export class BoardScene extends EngineScene {
       y: -104,
       width: 66,
       height: 66,
-
-      deltaMove: 3,
     });
 
     this.addEntity(enemy);
+
+    const enemies = this.getEntities().filter(
+      (x) => x.config.name !== player.config.name,
+    );
+
+    const isPlayerCollideWithEnemyFromBottom = ({ type, who }) =>
+      ['top-left', 'top-right'].includes(type) && who.config.name === 'Enemy';
+
+    this.collision.overlap(player, enemies, (entity, options) => {
+      if (isPlayerCollideWithEnemyFromBottom(options)) {
+        entity.destroy();
+        this.removeEntity(entity);
+      }
+    });
   }
 
   render() {
@@ -50,5 +62,6 @@ export class BoardScene extends EngineScene {
     // console.debug('BoardScene > update');
     this.setBackgroundColor('#a7e1fd');
     super.update();
+    this.collision.update();
   }
 }

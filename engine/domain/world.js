@@ -6,6 +6,7 @@ export class EngineWorld extends SceneManager {
   config = {
     isVisiblePlayerLabel: false,
     isVisibleBoundingBox: false,
+    isVisibleBoundingPoints: false,
   };
 
   get context() {

@@ -26,6 +26,8 @@ export class Entity extends EventEmitter {
     height: 0,
   };
 
+  alive = true;
+
   /**
    * @type {() => void|null}
    */
@@ -43,15 +45,20 @@ export class Entity extends EventEmitter {
   }
 
   render() {
+    // console.debug(`Entity > render [${this.config.name}]`);
+
+    this._renderImage();
+
     if (this.config.world?.config.isVisiblePlayerLabel) {
       this._renderLabel();
     }
 
-    // console.debug(`Entity > render [${this.config.name}]`);
-    this._renderImage();
-
     if (this.config.world?.config.isVisibleBoundingBox) {
       this._renderBoundingBox();
+    }
+
+    if (this.config.world?.config.isVisibleBoundingPoints) {
+      this._renderBoundingPoints();
     }
   }
 
@@ -63,6 +70,7 @@ export class Entity extends EventEmitter {
 
   destroy() {
     // console.debug(`Entity > destroy [${this.config.name}]`);
+    this.alive = false;
     this.removeListeners?.();
   }
 
@@ -79,28 +87,15 @@ export class Entity extends EventEmitter {
     }
   }
 
-  _renderBoundingBox() {
+  _renderPoint(x, y, pointSize = 3, color = 'white') {
     const cfg = this.config;
     const ctx = cfg.world?.context;
     if (!ctx) {
       return;
     }
 
-    // Background
-    ctx.fillStyle = 'rgba(25, 180, 5, 0.8)';
-    ctx.fillRect(cfg.x, cfg.y, cfg.width, cfg.height);
-
-    // Border
-    // ctx.beginPath();
-    // ctx.lineWidth = 0.3;
-    // ctx.moveTo(cfg.x, cfg.y);
-    // ctx.lineTo(cfg.x + cfg.width, cfg.y);
-    // ctx.lineTo(cfg.x + cfg.width, cfg.y + cfg.height);
-    // ctx.lineTo(cfg.x, cfg.y + cfg.height);
-    // ctx.lineTo(cfg.x, cfg.y);
-    // ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
-    // ctx.lineCap = 'square';
-    // ctx.stroke();
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, pointSize, pointSize);
   }
 
   _renderImage() {
@@ -128,5 +123,59 @@ export class Entity extends EventEmitter {
     ctx.fillStyle = 'rgb(255, 255, 255)';
     ctx.textAlign = 'center';
     ctx.fillText(cfg?.name ?? 'NONAME', cfg.x + cfg.width / 2, cfg.y - 15);
+  }
+
+  _renderBoundingBox() {
+    const cfg = this.config;
+    const ctx = cfg.world?.context;
+    if (!ctx) {
+      return;
+    }
+
+    // Background
+    ctx.fillStyle = 'rgba(25, 180, 5, 0.8)';
+    ctx.fillRect(cfg.x, cfg.y, cfg.width, cfg.height);
+
+    // Border
+    // ctx.beginPath();
+    // ctx.lineWidth = 0.3;
+    // ctx.moveTo(cfg.x, cfg.y);
+    // ctx.lineTo(cfg.x + cfg.width, cfg.y);
+    // ctx.lineTo(cfg.x + cfg.width, cfg.y + cfg.height);
+    // ctx.lineTo(cfg.x, cfg.y + cfg.height);
+    // ctx.lineTo(cfg.x, cfg.y);
+    // ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
+    // ctx.lineCap = 'square';
+    // ctx.stroke();
+  }
+
+  _renderBoundingPoints() {
+    const { x: px, y: py, width: pWidth, height: pHeight } = this.config;
+
+    // top left corner
+    this._renderPoint(px, py);
+    // top center
+    this._renderPoint(px + pWidth / 2, py);
+    // top right corner
+    this._renderPoint(px + pWidth, py);
+
+    // ---------------------------------------------------------------------
+
+    // right center
+    this._renderPoint(px + pWidth, py + pHeight / 2);
+
+    // ---------------------------------------------------------------------
+
+    // bottom right corner
+    this._renderPoint(px + pWidth, py + pHeight);
+    // bottom center
+    this._renderPoint(px + pWidth / 2, py + pHeight);
+    // bottom left corner
+    this._renderPoint(px, py + pHeight);
+
+    // ---------------------------------------------------------------------
+
+    // left center
+    this._renderPoint(px, py + pHeight / 2);
   }
 }

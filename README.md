@@ -11,6 +11,7 @@
 - ✅ UI Events on any entity (like player)
 - ✅ View Types: Top Down View
 - ✅ View Types: Side View (gravity, jumping)
+- ✅ Collisions
 
 ## Preview 🎉
 

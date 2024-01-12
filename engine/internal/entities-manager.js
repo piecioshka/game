@@ -5,6 +5,17 @@ export class EntitiesManager {
     this.#entities.push(entity);
   }
 
+  getEntities() {
+    return this.#entities;
+  }
+
+  removeEntity(entity) {
+    const index = this.#entities.indexOf(entity);
+    if (index >= 0) {
+      this.#entities.splice(index, 1);
+    }
+  }
+
   destroyEntities() {
     this.#entities.length = 0;
   }
@@ -12,15 +23,5 @@ export class EntitiesManager {
   runOnAllEntities(methodName) {
     // console.debug('EntitiesManager > runOnAllEntities', { methodName });
     this.#entities.forEach((entity) => entity[methodName]?.());
-
-    // const size = this.#entities.length;
-
-    // for (let i = 0; i < size; i++) {
-    //   this.#entities[i][methodName]?.();
-    // }
-
-    // for (let entity of this.#entities) {
-    //   entity[methodName]?.();
-    // }
   }
 }

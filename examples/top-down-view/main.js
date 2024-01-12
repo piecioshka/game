@@ -13,6 +13,7 @@ function main() {
 
   game.world.config.isVisiblePlayerLabel = true;
   game.world.config.isVisibleBoundingBox = true;
+  game.world.config.isVisibleBoundingPoints = true;
 
   game.start();
 }

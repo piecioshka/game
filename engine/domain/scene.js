@@ -1,3 +1,4 @@
+import { CollisionDetector } from '../internal/collision-detector';
 import { EntitiesManager } from '../internal/entities-manager';
 
 export class EngineScene extends EntitiesManager {
@@ -11,6 +12,8 @@ export class EngineScene extends EntitiesManager {
      */
     viewType: null,
   };
+
+  collision = new CollisionDetector();
 
   constructor(props) {
     super();
@@ -34,6 +37,7 @@ export class EngineScene extends EntitiesManager {
 
   update() {
     this.runOnAllEntities('update');
+    this.collision.update();
   }
 
   destroy() {

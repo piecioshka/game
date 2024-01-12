@@ -28,7 +28,7 @@ export class EngineSideView extends EngineView {
   }
 
   _updatePosition(entity, newPosition) {
-    const protectedPosition = this._applyBoundaries(entity, newPosition);
+    const protectedPosition = this._applyWorldBoundaries(entity, newPosition);
     entity.moveTo(protectedPosition);
   }
 

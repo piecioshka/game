@@ -9,7 +9,7 @@
   - [x] Create
   - [x] Render a canvas
 - [x] Entity
-  - [x] Create
+  - [x] Create / Remove
   - [x] Set position
   - [x] Render image
   - [x] Display character label above the asset
@@ -27,8 +27,8 @@
 - [x] Views: Side View
   - [x] Gravity
   - [x] Jumping
-- [ ] Collisions
-  - Support defining handle for resolving collision
+- [x] Collisions
+  - [x] Support set handle for resolving collision
 - [ ] Countdown
   - [ ] Create
   - [ ] Start / pause / stop
