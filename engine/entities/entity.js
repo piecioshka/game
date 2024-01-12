@@ -44,10 +44,11 @@ export class Entity extends EventEmitter {
 
   render() {
     // console.debug(`Entity > render [${this.config.name}]`);
+    this.renderImage();
+
     if (this.config.world?.config.isVisibleBoundingBox) {
       this.renderBoundingBox();
     }
-    this.renderImage();
   }
 
   update() {
@@ -80,19 +81,22 @@ export class Entity extends EventEmitter {
     if (!ctx) {
       return;
     }
-    ctx.fillStyle = 'rgba(0, 217, 176, 0.8)';
+
+    // Background
+    ctx.fillStyle = 'rgba(25, 180, 5, 0.8)';
     ctx.fillRect(cfg.x, cfg.y, cfg.width, cfg.height);
 
-    ctx.beginPath();
-    ctx.lineWidth = 0.3;
-    ctx.moveTo(cfg.x, cfg.y);
-    ctx.lineTo(cfg.x + cfg.width, cfg.y);
-    ctx.lineTo(cfg.x + cfg.width, cfg.y + cfg.height);
-    ctx.lineTo(cfg.x, cfg.y + cfg.height);
-    ctx.lineTo(cfg.x, cfg.y);
-    ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
-    ctx.lineCap = 'square';
-    ctx.stroke();
+    // Border
+    // ctx.beginPath();
+    // ctx.lineWidth = 0.3;
+    // ctx.moveTo(cfg.x, cfg.y);
+    // ctx.lineTo(cfg.x + cfg.width, cfg.y);
+    // ctx.lineTo(cfg.x + cfg.width, cfg.y + cfg.height);
+    // ctx.lineTo(cfg.x, cfg.y + cfg.height);
+    // ctx.lineTo(cfg.x, cfg.y);
+    // ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
+    // ctx.lineCap = 'square';
+    // ctx.stroke();
   }
 
   renderImage() {
