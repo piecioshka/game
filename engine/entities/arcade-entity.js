@@ -61,7 +61,8 @@ export class ArcadeEntity extends Entity {
 
     ctx.font = '12px Arial';
     ctx.fillStyle = 'rgb(255, 255, 255)';
-    ctx.fillText(cfg?.name ?? 'NONAME', cfg.x + 30, cfg.y - 15);
+    ctx.textAlign = 'center';
+    ctx.fillText(cfg?.name ?? 'NONAME', cfg.x + cfg.width / 2, cfg.y - 15);
   }
 
   render() {
