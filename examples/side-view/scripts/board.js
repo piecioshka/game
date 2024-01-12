@@ -8,11 +8,11 @@ export class BoardScene extends EngineScene {
       world,
       viewType,
       name: 'Player',
-      assetId: 'characterA',
+      assetId: 'mario',
       x: 100,
       y: -104,
-      width: 104,
-      height: 168,
+      width: 82,
+      height: 100,
 
       deltaMove: 5,
       controlKeys: {
@@ -24,6 +24,28 @@ export class BoardScene extends EngineScene {
       },
     });
     this.addEntity(player);
+
+    const enemy = new ArcadeEntity({
+      world,
+      viewType,
+      name: 'Enemy',
+      assetId: 'goomba',
+      x: 500,
+      y: -104,
+      width: 66,
+      height: 66,
+
+      deltaMove: 5,
+      controlKeys: {
+        up: KEYS.W,
+        right: KEYS.D,
+        down: KEYS.S,
+        left: KEYS.A,
+        a: KEYS.X,
+      },
+    });
+
+    this.addEntity(enemy);
   }
 
   render() {
