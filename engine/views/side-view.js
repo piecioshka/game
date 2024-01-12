@@ -64,7 +64,7 @@ export class EngineSideView extends EngineView {
     const { y, height } = entity.config;
 
     if (y + height < worldHeight) {
-      // Entity can jump only when is on the ground
+      // INFO: Entity can jump only when is on the ground
       return;
     }
 

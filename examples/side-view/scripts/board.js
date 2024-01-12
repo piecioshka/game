@@ -36,13 +36,6 @@ export class BoardScene extends EngineScene {
       height: 66,
 
       deltaMove: 5,
-      controlKeys: {
-        up: KEYS.W,
-        right: KEYS.D,
-        down: KEYS.S,
-        left: KEYS.A,
-        a: KEYS.X,
-      },
     });
 
     this.addEntity(enemy);

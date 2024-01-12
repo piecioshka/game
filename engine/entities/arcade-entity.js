@@ -30,6 +30,11 @@ export class ArcadeEntity extends Entity {
 
   _setupBindings() {
     // console.debug(`ArcadeEntity > _setupBindings [${this.config.name}]`);
+    if (!this.controlKeys) {
+      // INFO: Do not enable control when keys aren't defined
+      return;
+    }
+
     const { up, right, down, left, a, b } = this.controlKeys;
     const viewType = this.config.viewType;
 
@@ -48,28 +53,6 @@ export class ArcadeEntity extends Entity {
     map.forEach((action, key) => {
       this.keyboard?.on(KEYS[key], action.bind(this));
     });
-  }
-
-  _renderLabel() {
-    const cfg = this.config;
-    const ctx = cfg.world?.context;
-    if (!ctx) {
-      return;
-    }
-    ctx.fillStyle = 'rgb(0, 0, 0)';
-    ctx.fillRect(cfg.x, cfg.y - 30, cfg.width, 20);
-
-    ctx.font = '12px Arial';
-    ctx.fillStyle = 'rgb(255, 255, 255)';
-    ctx.textAlign = 'center';
-    ctx.fillText(cfg?.name ?? 'NONAME', cfg.x + cfg.width / 2, cfg.y - 15);
-  }
-
-  render() {
-    super.render();
-    if (this.config.world?.config.isVisiblePlayerLabel) {
-      this._renderLabel();
-    }
   }
 
   update() {

@@ -43,11 +43,15 @@ export class Entity extends EventEmitter {
   }
 
   render() {
+    if (this.config.world?.config.isVisiblePlayerLabel) {
+      this._renderLabel();
+    }
+
     // console.debug(`Entity > render [${this.config.name}]`);
-    this.renderImage();
+    this._renderImage();
 
     if (this.config.world?.config.isVisibleBoundingBox) {
-      this.renderBoundingBox();
+      this._renderBoundingBox();
     }
   }
 
@@ -75,7 +79,7 @@ export class Entity extends EventEmitter {
     }
   }
 
-  renderBoundingBox() {
+  _renderBoundingBox() {
     const cfg = this.config;
     const ctx = cfg.world?.context;
     if (!ctx) {
@@ -99,7 +103,7 @@ export class Entity extends EventEmitter {
     // ctx.stroke();
   }
 
-  renderImage() {
+  _renderImage() {
     const cfg = this.config;
     const ctx = cfg.world?.context;
     if (!ctx) {
@@ -109,5 +113,20 @@ export class Entity extends EventEmitter {
     if (img) {
       ctx.drawImage(img, cfg.x, cfg.y);
     }
+  }
+
+  _renderLabel() {
+    const cfg = this.config;
+    const ctx = cfg.world?.context;
+    if (!ctx) {
+      return;
+    }
+    ctx.fillStyle = 'rgb(0, 0, 0)';
+    ctx.fillRect(cfg.x, cfg.y - 30, cfg.width, 20);
+
+    ctx.font = '12px Arial';
+    ctx.fillStyle = 'rgb(255, 255, 255)';
+    ctx.textAlign = 'center';
+    ctx.fillText(cfg?.name ?? 'NONAME', cfg.x + cfg.width / 2, cfg.y - 15);
   }
 }
