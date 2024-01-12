@@ -6,7 +6,7 @@ const worldHeight = 400;
 export class EngineSideView extends EngineView {
   config = {
     gravity: 0,
-    jump: 0,
+    jump: 0, // [0-100]
   };
 
   constructor(props) {
@@ -50,10 +50,26 @@ export class EngineSideView extends EngineView {
     });
   }
 
+  onPressUp(entity) {
+    // console.debug('EngineSideView > onPressAButton', entity);
+    this.#jump(entity);
+  }
+
   onPressAButton(entity) {
     // console.debug('EngineSideView > onPressAButton', entity);
+    this.#jump(entity);
+  }
+
+  #jump(entity) {
+    const { y, height } = entity.config;
+
+    if (y + height < worldHeight) {
+      // Entity can jump only when is on the ground
+      return;
+    }
+
     this._updatePosition(entity, {
-      y: entity.config.y - (worldHeight * this.config.jump) / 100,
+      y: y - ((worldHeight - height) * this.config.jump) / 100,
     });
   }
 }
