@@ -5,8 +5,8 @@ import { GameOverScene } from './scenes/game-over';
 
 export class Game extends EngineGame {
   assets = {
-    characterA: 'assets/character.png',
-    characterB: 'assets/character.png',
+    characterA: 'static/character.png',
+    characterB: 'static/character.png',
   };
 
   constructor(props) {

@@ -3,8 +3,8 @@ import { BoardScene } from './board';
 
 export class Game extends EngineGame {
   assets = {
-    mario: 'assets/mario.png',
-    goomba: 'assets/goomba-1.png',
+    mario: 'static/mario.png',
+    goomba: 'static/goomba-1.png',
   };
 
   constructor(props) {

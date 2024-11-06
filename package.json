@@ -17,10 +17,10 @@
         "deploy": "NODE_DEBUG=gh-pages gh-pages -d dist/",
         "prebuild": "npm run clear",
         "build": "npm run build:development",
-        "build:development": "webpack --config webpack/builds/webpack.config.dev.js --env addons=replaceVersion,copyAssets",
-        "build:production": "webpack --config webpack/builds/webpack.config.prod.js --env addons=replaceVersion,copyAssets",
+        "build:development": "webpack --config webpack/builds/webpack.config.dev.js --env addons=replaceVersion,copyStatic",
+        "build:production": "webpack --config webpack/builds/webpack.config.prod.js --env addons=replaceVersion,copyStatic",
         "start": "http-server dist/ -c-1",
-        "dev": "webpack serve --config webpack/builds/webpack.config.dev.js --env addons=replaceVersion,copyAssets",
+        "dev": "webpack serve --config webpack/builds/webpack.config.dev.js --env addons=replaceVersion,copyStatic",
         "test": "vitest engine/"
     },
     "devDependencies": {

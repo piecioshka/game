@@ -7,12 +7,12 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'examples/top-down-view/assets/',
-          to: 'top-down-view/assets',
+          from: 'examples/top-down-view/static/',
+          to: 'top-down-view/static',
         },
         {
-          from: 'examples/side-view/assets/',
-          to: 'side-view/assets',
+          from: 'examples/side-view/static/',
+          to: 'side-view/static',
         },
         {
           from: 'examples/index.html',
