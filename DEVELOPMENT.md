@@ -33,7 +33,7 @@ Each addon will be merge via `webpack-merge`.
 
 See examples:
 
-- [webpack.bundleanalyzer.js](webpack/addons/webpack.bundleanalyzer.js)
+- [webpack.bundleAnalyzer.js](webpack/addons/webpack.bundleAnalyzer.js)
 
 ## How to run addons?
 
