@@ -40,17 +40,17 @@
 
 - [x] Scene: Intro z obrazkiem powitalnym
 
-- [ ] Scene: Plansza
-  - [ ] Lecisz rakietą od dołu do góry
-  - [ ] Czas ciągle maleje (countdown)
-    - [ ] Gdy czas osiąga wartość 0 to "Game Over"
-  - [ ] Pojawiają się asteroidy
-    - [ ] Uderzenie w nie powoduje, że się ginie i "Game Over"
-  - [ ] Pojawiają się zegarki
-    - [ ] Dodanie czasu do głównego zegara
-  - [ ] Pojawiają się diamenty
-    - [ ] Po kolizji z nimi, dodają Ci się punkty
-  - [ ] Zmiana kolorystyczna (fiolet, zielony, pomarańczowy, czerwony)
+- [x] Scene: Plansza
+  - [x] Lecisz rakietą od dołu do góry
+  - [x] Czas ciągle maleje (countdown)
+    - [x] Gdy czas osiąga wartość 0 to "Game Over"
+  - [x] Pojawiają się asteroidy
+    - [x] Uderzenie w nie powoduje, że się ginie i "Game Over"
+  - [x] Pojawiają się zegarki
+    - [x] Dodanie czasu do głównego zegara
+  - [x] Pojawiają się diamenty
+    - [x] Po kolizji z nimi, dodają Ci się punkty
+  - [x] Zmiana kolorystyczna (fiolet, zielony, pomarańczowy, czerwony)
 
 - [ ] Scene: Game Over
 
