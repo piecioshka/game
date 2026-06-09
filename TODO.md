@@ -29,9 +29,9 @@
   - [x] Jumping
 - [x] Collisions
   - [x] Support set handle for resolving collision
-- [ ] Countdown
-  - [ ] Create
-  - [ ] Start / pause / stop
+- [x] Countdown
+  - [x] Create
+  - [x] Start / pause / stop
 - [ ] Load sprite
   - Change image during rendering entity
 - [ ] Map

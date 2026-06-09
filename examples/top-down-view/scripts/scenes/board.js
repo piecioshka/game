@@ -1,12 +1,15 @@
-import { EngineScene, ArcadeEntity, KEYS } from '@engine';
+import { EngineScene, ArcadeEntity, Countdown, KEYS } from '@engine';
 
 export class BoardScene extends EngineScene {
+  countdown = new Countdown({ duration: 30_000 });
+
   setup() {
     const { world, viewType } = this.config;
 
-    // setTimeout(() => {
-    //   world.startScene('over');
-    // }, 3000);
+    this.countdown.start();
+    this.countdown.on('complete', () => {
+      world.startScene('over');
+    });
 
     const player = new ArcadeEntity({
       world,
@@ -60,5 +63,18 @@ export class BoardScene extends EngineScene {
     // console.debug('BoardScene > update');
     this.setBackgroundColor('#a7e1fd');
     super.update();
+    this.countdown.update();
+    this._renderCountdown();
+  }
+
+  _renderCountdown() {
+    const world = this.config.world;
+    const ctx = world.context;
+    const seconds = (this.countdown.getRemaining() / 1000).toFixed(1);
+
+    ctx.font = 'bold 24px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#293d51';
+    ctx.fillText(`⏱ ${seconds}s`, world.width - 16, 36);
   }
 }

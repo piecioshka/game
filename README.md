@@ -12,6 +12,7 @@
 - ✅ View Types: Top Down View
 - ✅ View Types: Side View (gravity, jumping)
 - ✅ Collisions
+- ✅ Countdown timer (start / pause / resume / stop)
 
 ## Preview 🎉
 

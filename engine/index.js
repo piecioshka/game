@@ -1,3 +1,4 @@
+export * from './domain/countdown';
 export * from './domain/game';
 export * from './domain/scene';
 export * from './domain/world';
