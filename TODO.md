@@ -64,4 +64,4 @@
     - [x] Dotknięcie nich powoduje, że się ginie i "Game Over"
   - [x] Możesz skoczyć na murek
 
-- [ ] Scene: Game Over
+- [x] Scene: Game Over

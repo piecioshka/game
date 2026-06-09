@@ -42,19 +42,38 @@ export class GameOverScene extends EngineScene {
     const ctx = world.context;
     const cx = world.width / 2;
     const cy = world.height / 2;
+    const state = this.config.state ?? { score: 0, reason: null };
 
     ctx.textAlign = 'center';
 
     ctx.fillStyle = '#ff5252';
     ctx.font = 'bold 52px monospace';
-    ctx.fillText('GAME OVER', cx, cy - 10);
+    ctx.fillText('GAME OVER', cx, cy - 50);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '22px monospace';
+    ctx.fillText(this._reasonText(state.reason), cx, cy);
+
+    ctx.fillStyle = '#ffd54f';
+    ctx.font = 'bold 30px monospace';
+    ctx.fillText(`Zebrane grzybki: ${state.score}`, cx, cy + 45);
 
     ctx.fillStyle = '#90a4ae';
     ctx.font = '16px monospace';
     ctx.fillText(
       'Naciśnij ENTER lub kliknij, aby zagrać ponownie',
       cx,
-      cy + 40,
+      cy + 90,
     );
+  }
+
+  _reasonText(reason) {
+    if (reason === 'enemy') {
+      return 'Dotknął Cię wróg!';
+    }
+    if (reason === 'timeout') {
+      return 'Czas się skończył!';
+    }
+    return '';
   }
 }
