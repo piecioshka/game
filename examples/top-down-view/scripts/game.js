@@ -4,9 +4,9 @@ import { BoardScene } from './scenes/board';
 import { GameOverScene } from './scenes/game-over';
 
 export class Game extends EngineGame {
-  assets = {
-    characterA: 'static/character.png',
-  };
+  // The rocket game draws everything with canvas primitives, so no image
+  // assets are needed.
+  assets = {};
 
   constructor(props) {
     super(props);

@@ -52,7 +52,7 @@
     - [x] Po kolizji z nimi, dodają Ci się punkty
   - [x] Zmiana kolorystyczna (fiolet, zielony, pomarańczowy, czerwony)
 
-- [ ] Scene: Game Over
+- [x] Scene: Game Over
 
 ## Example Game "side-view"
 
