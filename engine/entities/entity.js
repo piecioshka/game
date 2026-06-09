@@ -29,6 +29,11 @@ export class Entity extends EventEmitter {
   alive = true;
 
   /**
+   * @type {import('../internal/sprite-animation').SpriteAnimation|null}
+   */
+  animation = null;
+
+  /**
    * @type {() => void|null}
    */
   removeListeners = null;
@@ -64,8 +69,32 @@ export class Entity extends EventEmitter {
 
   update() {
     // console.debug(`Entity > update [${this.config.name}]`);
+    if (this.animation) {
+      // INFO: Swap the rendered image to the current animation frame
+      this.setAsset(this.animation.currentFrame());
+    }
     this.render();
     this.config.viewType?.update?.(this);
+  }
+
+  /**
+   * Change the image used while rendering this entity.
+   * @param {string|null} assetId
+   */
+  setAsset(assetId) {
+    if (assetId) {
+      this.config.assetId = assetId;
+    }
+  }
+
+  /**
+   * Play a sprite animation by cycling the entity's image over time.
+   * @param {import('../internal/sprite-animation').SpriteAnimation} animation
+   */
+  setAnimation(animation) {
+    this.animation = animation;
+    animation?.start();
+    return this;
   }
 
   destroy() {

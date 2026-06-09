@@ -1,4 +1,4 @@
-import { EngineScene, ArcadeEntity, KEYS } from '@engine';
+import { EngineScene, ArcadeEntity, SpriteAnimation, KEYS } from '@engine';
 
 export class BoardScene extends EngineScene {
   setup() {
@@ -35,6 +35,14 @@ export class BoardScene extends EngineScene {
       width: 66,
       height: 66,
     });
+
+    // INFO: Animate the goomba by cycling its sprite frames during rendering
+    enemy.setAnimation(
+      new SpriteAnimation({
+        frames: ['goomba', 'goomba2', 'goomba3'],
+        fps: 6,
+      }),
+    );
 
     this.addEntity(enemy);
 

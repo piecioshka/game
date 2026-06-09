@@ -12,6 +12,7 @@
 - ✅ View Types: Top Down View
 - ✅ View Types: Side View (gravity, jumping)
 - ✅ Collisions
+- ✅ Sprite animation (swap entity image while rendering)
 
 ## Preview 🎉
 
