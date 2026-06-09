@@ -40,12 +40,10 @@ export class BoardScene extends EngineScene {
       height: 168,
 
       deltaMove: 3,
-      controlKeys: {
-        up: KEYS.W,
-        right: KEYS.D,
-        down: KEYS.S,
-        left: KEYS.A,
-        a: KEYS.X,
+      // INFO: Controlled by computer - chases the player around the board
+      autoMove: {
+        pattern: 'chase',
+        target: player,
       },
     });
     this.addEntity(enemy);
