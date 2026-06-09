@@ -56,12 +56,12 @@
 
 ## Example Game "side-view"
 
-- [ ] Scene: Plansza
-  - [ ] Chodzisz postacią i zbierać grzybki
-  - [ ] Czas ciągle maleje (countdown)
-    - [ ] Gdy czas osiąga wartość 0 to "Game Over"
-  - [ ] Pojawiają się wrogowie
-    - [ ] Dotknięcie nich powoduje, że się ginie i "Game Over"
-  - [ ] Możesz skoczyć na murek
+- [x] Scene: Plansza
+  - [x] Chodzisz postacią i zbierać grzybki
+  - [x] Czas ciągle maleje (countdown)
+    - [x] Gdy czas osiąga wartość 0 to "Game Over"
+  - [x] Pojawiają się wrogowie
+    - [x] Dotknięcie nich powoduje, że się ginie i "Game Over"
+  - [x] Możesz skoczyć na murek
 
 - [ ] Scene: Game Over
