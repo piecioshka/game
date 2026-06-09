@@ -12,6 +12,7 @@
 - ✅ View Types: Top Down View
 - ✅ View Types: Side View (gravity, jumping)
 - ✅ Collisions
+- ✅ Tile-based map (color or image tiles)
 
 ## Preview 🎉
 
