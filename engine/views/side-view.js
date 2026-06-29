@@ -5,6 +5,10 @@ export class EngineSideView extends EngineView {
     gravity: 0,
     jump: 0, // [0-100]
     worldHeight: 400,
+    // Width of the playable level. When larger than the canvas (a scrolling
+    // level), horizontal boundaries use this instead of the canvas width.
+    // Null -> fall back to the canvas width (single-screen levels).
+    worldWidth: null,
     /**
      * Solid surfaces the entity can land on and cannot pass through, e.g. a
      * wall/ledge ("murek"). Each platform: { x, y, width, height }
@@ -77,17 +81,32 @@ export class EngineSideView extends EngineView {
    * Horizontal move that cannot pass through a platform: if the target X would
    * overlap a platform the entity is standing beside (not on top of), it is
    * clamped to the platform's edge.
+   *
+   * The wall is only solid BELOW its top edge. When the entity's feet are at or
+   * above the platform top (within a one-step `clearance`), horizontal movement
+   * is allowed so the entity can slide over the crest and then fall onto it via
+   * gravity. Keep `clearance` small: a wide band lets the body slide into the
+   * platform column while its feet are still below the top, which embeds it in
+   * the wall. The right lever for "can the entity reach the top at all" is the
+   * jump height, not this tolerance.
    */
   _moveHorizontally(entity, targetX) {
     const { y, width, height } = entity.config;
     let x = targetX;
 
     this.config.platforms.forEach((platform) => {
-      const overlapY =
-        y + height > platform.y && y < platform.y + platform.height;
-      if (!overlapY) {
+      const clearance = Math.abs(this._gravityStep()) + 1;
+      const feet = y + height;
+
+      // Feet at/above the platform top: the entity is over the ledge, not
+      // beside it -> allow horizontal movement (it lands on top next frame).
+      const isAboveTop = feet <= platform.y + clearance;
+
+      const overlapY = feet > platform.y && y < platform.y + platform.height;
+      if (!overlapY || isAboveTop) {
         return;
       }
+
       const wasLeft = entity.config.x + width <= platform.x;
       const wasRight = entity.config.x >= platform.x + platform.width;
       const hitsFromLeft = wasLeft && x + width > platform.x;
@@ -103,8 +122,31 @@ export class EngineSideView extends EngineView {
   }
 
   _updatePosition(entity, newPosition) {
-    const protectedPosition = this._applyWorldBoundaries(entity, newPosition);
+    const protectedPosition = this._clampToLevel(entity, newPosition);
     entity.moveTo(protectedPosition);
+  }
+
+  /**
+   * Keeps the entity inside the level horizontally. Uses `config.worldWidth`
+   * for scrolling levels (wider than the canvas); falls back to the canvas
+   * width otherwise. Vertical position is left untouched so gravity can carry
+   * the entity into pits below the canvas.
+   */
+  _clampToLevel(entity, props) {
+    const cfg = entity.config;
+    const width = cfg.width;
+    const levelWidth = this.config.worldWidth ?? cfg.world.width;
+
+    let x = props.x ?? cfg.x;
+    const y = props.y ?? cfg.y;
+
+    if (x < 0) {
+      x = 0;
+    } else if (x + width > levelWidth) {
+      x = levelWidth - width;
+    }
+
+    return { x, y };
   }
 
   /**
@@ -130,6 +172,13 @@ export class EngineSideView extends EngineView {
   }
 
   #jump(entity) {
+    // Rising-edge guard: while a jump key stays held the keyboard re-emits
+    // every frame; only the first emit (before the latch is set) may jump.
+    // The latch is cleared by ArcadeEntity once the jump keys are released.
+    if (entity.jumpLatched) {
+      return;
+    }
+
     const { y, height } = entity.config;
     const floor = this._floorY(entity);
 
@@ -138,6 +187,8 @@ export class EngineSideView extends EngineView {
       // INFO: Entity can jump only when it stands on a surface
       return;
     }
+
+    entity.jumpLatched = true;
 
     // Initial upwards impulse sized so the entity reaches ~`jump` pixels of
     // height under the current gravity (v0 = sqrt(2 * g * h)); gravity then

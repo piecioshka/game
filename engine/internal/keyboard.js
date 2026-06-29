@@ -45,6 +45,16 @@ export class EngineKeyboard extends EventEmitter {
     this.#pressKeys.forEach(this._dispatchEvent.bind(this));
   }
 
+  /**
+   * Whether a key is currently held down this frame. The map is keyed by the
+   * numeric `evt.keyCode`, so pass the numeric code (not the KEYS name).
+   * @param {number} code
+   * @returns {boolean}
+   */
+  isPressed(code) {
+    return this.#pressKeys.get(Number(code)) === true;
+  }
+
   destroy() {
     // console.debug('EngineKeyboard > destroy');
     this.#pressKeys.clear();

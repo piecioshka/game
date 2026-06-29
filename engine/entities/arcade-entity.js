@@ -25,6 +25,13 @@ export class ArcadeEntity extends Entity {
    */
   autoPilot = null;
 
+  /**
+   * Rising-edge latch for jump: set when a jump fires, cleared once all
+   * jump-bound keys are released, so holding the key cannot auto-repeat jump.
+   * @type {boolean}
+   */
+  jumpLatched = false;
+
   constructor(props) {
     const { controlKeys, deltaMove, autoMove, ...newProps } = props;
     super(newProps);
@@ -69,7 +76,31 @@ export class ArcadeEntity extends Entity {
   update() {
     super.update();
     this.keyboard?.update();
+    this._resetJumpLatch();
     this._updateAutoPilot();
+  }
+
+  /**
+   * Clears the jump latch once every jump-bound key (up / a) is released, so
+   * the next press is a fresh rising edge. The keyboard map is keyed by the
+   * numeric keyCode while `controlKeys` values are KEYS strings (e.g. '38'),
+   * so the code must be coerced to a Number before the lookup.
+   */
+  _resetJumpLatch() {
+    if (!this.jumpLatched || !this.controlKeys || !this.keyboard) {
+      return;
+    }
+
+    const jumpKeys = [this.controlKeys.up, this.controlKeys.a].filter(
+      (key) => key !== undefined,
+    );
+    const anyHeld = jumpKeys.some((key) =>
+      this.keyboard.isPressed(Number(key)),
+    );
+
+    if (!anyHeld) {
+      this.jumpLatched = false;
+    }
   }
 
   _updateAutoPilot() {
