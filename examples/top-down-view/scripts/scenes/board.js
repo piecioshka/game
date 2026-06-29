@@ -176,13 +176,13 @@ export class BoardScene extends EngineScene {
     const ctx = world.context;
     const seconds = (this.countdown.getRemaining() / 1000).toFixed(1);
 
-    ctx.font = 'bold 20px monospace';
+    ctx.font = '16px "Press Start 2P"';
     ctx.fillStyle = '#ffffff';
 
     ctx.textAlign = 'left';
-    ctx.fillText(`💎 ${this.score}`, 16, 30);
+    ctx.fillText(`*${this.score}`, 16, 34);
 
     ctx.textAlign = 'right';
-    ctx.fillText(`⏱ ${seconds}s`, world.width - 16, 30);
+    ctx.fillText(`${seconds}s`, world.width - 16, 34);
   }
 }

@@ -1,112 +1,105 @@
-// Lightweight canvas drawers for the rocket game entities. Keeping them as
-// plain functions lets both the controllable Rocket (ArcadeEntity) and the
-// FallingEntity (Entity) reuse the same look without binary image assets.
+// Pixel-art canvas drawers for the rocket game entities. Each shape is built
+// from a grid of square "pixels" so everything keeps a consistent retro look,
+// without needing binary image assets.
 
-export function drawRocket(ctx, { x, y, width, height }) {
-  const cx = x + width / 2;
-
-  // Exhaust flame
-  ctx.fillStyle = '#ff7043';
-  ctx.beginPath();
-  ctx.moveTo(x + width * 0.32, y + height * 0.92);
-  ctx.lineTo(cx, y + height * 1.18);
-  ctx.lineTo(x + width * 0.68, y + height * 0.92);
-  ctx.closePath();
-  ctx.fill();
-
-  // Body
-  ctx.fillStyle = '#eceff1';
-  ctx.beginPath();
-  ctx.moveTo(cx, y);
-  ctx.lineTo(x + width * 0.82, y + height * 0.7);
-  ctx.lineTo(x + width * 0.82, y + height * 0.92);
-  ctx.lineTo(x + width * 0.18, y + height * 0.92);
-  ctx.lineTo(x + width * 0.18, y + height * 0.7);
-  ctx.closePath();
-  ctx.fill();
-
-  // Fins
-  ctx.fillStyle = '#ef5350';
-  ctx.beginPath();
-  ctx.moveTo(x + width * 0.18, y + height * 0.7);
-  ctx.lineTo(x, y + height * 0.92);
-  ctx.lineTo(x + width * 0.18, y + height * 0.92);
-  ctx.closePath();
-  ctx.moveTo(x + width * 0.82, y + height * 0.7);
-  ctx.lineTo(x + width, y + height * 0.92);
-  ctx.lineTo(x + width * 0.82, y + height * 0.92);
-  ctx.closePath();
-  ctx.fill();
-
-  // Window
-  ctx.fillStyle = '#42a5f5';
-  ctx.beginPath();
-  ctx.arc(cx, y + height * 0.45, width * 0.15, 0, Math.PI * 2);
-  ctx.fill();
+// Paints a sprite described as rows of single-character color keys onto the
+// box {x, y, width, height}. A character missing from the palette (e.g. '.')
+// is transparent.
+function drawPixels(ctx, { x, y, width, height }, rows, palette) {
+  const cols = Math.max(...rows.map((r) => r.length));
+  const px = width / cols;
+  const py = height / rows.length;
+  for (let row = 0; row < rows.length; row += 1) {
+    const line = rows[row];
+    for (let col = 0; col < line.length; col += 1) {
+      const color = palette[line[col]];
+      if (!color) {
+        continue;
+      }
+      ctx.fillStyle = color;
+      // +1 avoids hairline gaps between pixels on fractional scales.
+      ctx.fillRect(x + col * px, y + row * py, px + 1, py + 1);
+    }
+  }
 }
 
-export function drawAsteroid(ctx, { x, y, width, height }) {
-  const r = Math.min(width, height) / 2;
-  const cx = x + width / 2;
-  const cy = y + height / 2;
+const ROCKET = [
+  '...WW...',
+  '..WBBW..',
+  '..WBBW..',
+  '.WBGGBW.',
+  '.WBGGBW.',
+  '.WBBBBW.',
+  'WWBBBBWW',
+  'R.WBBW.R',
+  'RR.FF.RR',
+  '...FF...',
+];
+const ROCKET_PALETTE = {
+  W: '#eceff1', // body
+  B: '#90a4ae', // body shade
+  G: '#42a5f5', // window
+  R: '#ef5350', // fins
+  F: '#ff7043', // flame
+};
 
-  ctx.fillStyle = '#8d6e63';
-  ctx.beginPath();
-  ctx.arc(cx, cy, r, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.fillStyle = '#6d4c41';
-  ctx.beginPath();
-  ctx.arc(cx - r * 0.3, cy - r * 0.25, r * 0.28, 0, Math.PI * 2);
-  ctx.arc(cx + r * 0.35, cy + r * 0.3, r * 0.18, 0, Math.PI * 2);
-  ctx.fill();
+export function drawRocket(ctx, box) {
+  drawPixels(ctx, box, ROCKET, ROCKET_PALETTE);
 }
 
-export function drawClock(ctx, { x, y, width, height }) {
-  const r = Math.min(width, height) / 2;
-  const cx = x + width / 2;
-  const cy = y + height / 2;
+const ASTEROID = [
+  '..AAAA..',
+  '.AABBAA.',
+  'AABAAABA',
+  'ABAAAAAA',
+  'AAAAABAA',
+  'AABAAAAA',
+  '.AAAABA.',
+  '..AAAA..',
+];
+const ASTEROID_PALETTE = {
+  A: '#8d6e63',
+  B: '#5d4037', // craters
+};
 
-  ctx.fillStyle = '#ffd54f';
-  ctx.beginPath();
-  ctx.arc(cx, cy, r, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.strokeStyle = '#f57f17';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.arc(cx, cy, r, 0, Math.PI * 2);
-  ctx.stroke();
-
-  ctx.strokeStyle = '#5d4037';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(cx, cy);
-  ctx.lineTo(cx, cy - r * 0.6);
-  ctx.moveTo(cx, cy);
-  ctx.lineTo(cx + r * 0.45, cy);
-  ctx.stroke();
+export function drawAsteroid(ctx, box) {
+  drawPixels(ctx, box, ASTEROID, ASTEROID_PALETTE);
 }
 
-export function drawDiamond(ctx, { x, y, width, height }) {
-  const cx = x + width / 2;
-  const shoulder = y + height * 0.35;
+const CLOCK = [
+  '..YYYY..',
+  '.YYYYYY.',
+  'YYHYYHYY',
+  'YYHHHYYY',
+  'YYHHHHYY',
+  'YYYYYYYY',
+  '.YYYYYY.',
+  '..YYYY..',
+];
+const CLOCK_PALETTE = {
+  Y: '#ffd54f',
+  H: '#5d4037', // hands
+};
 
-  ctx.fillStyle = '#26c6da';
-  ctx.beginPath();
-  ctx.moveTo(cx, y);
-  ctx.lineTo(x + width, shoulder);
-  ctx.lineTo(cx, y + height);
-  ctx.lineTo(x, shoulder);
-  ctx.closePath();
-  ctx.fill();
+export function drawClock(ctx, box) {
+  drawPixels(ctx, box, CLOCK, CLOCK_PALETTE);
+}
 
-  ctx.strokeStyle = '#b2ebf2';
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.moveTo(x, shoulder);
-  ctx.lineTo(x + width, shoulder);
-  ctx.moveTo(cx, y);
-  ctx.lineTo(cx, y + height);
-  ctx.stroke();
+const DIAMOND = [
+  '.LLLLLL.',
+  'LDDDDDDL',
+  '.DDDDDD.',
+  '.LDDDDL.',
+  '..DDDD..',
+  '..LDDL..',
+  '...DD...',
+  '...LL...',
+];
+const DIAMOND_PALETTE = {
+  D: '#26c6da',
+  L: '#b2ebf2', // facets / highlights
+};
+
+export function drawDiamond(ctx, box) {
+  drawPixels(ctx, box, DIAMOND, DIAMOND_PALETTE);
 }
