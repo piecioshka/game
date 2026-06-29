@@ -18,7 +18,7 @@ module.exports = (env) => {
 
     resolve: {
       alias: {
-        '@engine': path.join(root, 'engine')
+        '@engine': path.join(root, 'engine'),
       },
     },
 
