@@ -15,6 +15,7 @@
 - ✅ Collisions
 - ✅ Sprite animation (swap entity image while rendering)
 - ✅ Tile-based map (color or image tiles)
+- ✅ Countdown timer (start / pause / resume / stop)
 
 ## Preview 🎉
 
