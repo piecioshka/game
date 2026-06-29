@@ -32,7 +32,7 @@
 - [ ] Countdown
   - [ ] Create
   - [ ] Start / pause / stop
-- [ ] Load sprite
+- [x] Load sprite
   - Change image during rendering entity
 - [ ] Map
 
