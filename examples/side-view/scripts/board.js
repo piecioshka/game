@@ -15,6 +15,7 @@ const MUSHROOM_INTERVAL = 80; // frames between mushroom spawns
 const MAX_MUSHROOMS = 6;
 const MUSHROOM_POINTS = 10;
 const MUSHROOM_SIZE = 34;
+const GAME_OVER_DELAY = 1000; // ms the board stays frozen before Game Over
 
 // The wall/ledge ("murek") the player can jump onto.
 const BRICK = { x: 380, y: 250, width: 140, height: 150 };
@@ -245,7 +246,7 @@ export class BoardScene extends EngineScene {
     setTimeout(() => {
       this.#over = true;
       this.config.world.startScene('over');
-    }, 2000);
+    }, GAME_OVER_DELAY);
   }
 
   _renderClouds() {
