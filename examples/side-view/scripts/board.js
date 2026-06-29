@@ -3,12 +3,12 @@ import {
   ArcadeEntity,
   Countdown,
   SpriteAnimation,
-  EngineAssetsLoader,
   KEYS,
 } from '@engine';
 import { Mushroom } from './entities/mushroom';
 import { Brick } from './entities/brick';
 import { Enemy } from './entities/enemy';
+import { drawCloud } from './draw-shapes';
 
 const DURATION = 30_000;
 const MUSHROOM_INTERVAL = 80; // frames between mushroom spawns
@@ -20,11 +20,11 @@ const GAME_OVER_DELAY = 1000; // ms the board stays frozen before Game Over
 // The wall/ledge ("murek") the player can jump onto.
 const BRICK = { x: 380, y: 250, width: 140, height: 150 };
 
-// Static background clouds (drawn from the "cloud" image asset).
+// Static background clouds, drawn as pixel-art (no image asset).
 const CLOUDS = [
-  { x: 120, y: 50, scale: 1 },
-  { x: 470, y: 90, scale: 0.7 },
-  { x: 700, y: 40, scale: 1.2 },
+  { x: 120, y: 50, width: 150, height: 80 },
+  { x: 470, y: 90, width: 105, height: 56 },
+  { x: 700, y: 40, width: 180, height: 96 },
 ];
 
 export class BoardScene extends EngineScene {
@@ -254,13 +254,7 @@ export class BoardScene extends EngineScene {
 
   _renderClouds() {
     const ctx = this.config.world.context;
-    const img = EngineAssetsLoader.getLoadedAsset('cloud');
-    if (!img) {
-      return;
-    }
-    CLOUDS.forEach(({ x, y, scale }) => {
-      ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-    });
+    CLOUDS.forEach((cloud) => drawCloud(ctx, cloud));
   }
 
   _renderGround() {

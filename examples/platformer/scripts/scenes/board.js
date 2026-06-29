@@ -5,7 +5,7 @@ import { Platform } from '../entities/platform';
 import { Goal } from '../entities/goal';
 import { drawCloud } from '../draw-shapes';
 
-const LEVEL_WIDTH = 3600;
+export const LEVEL_WIDTH = 3600;
 const GROUND_Y = 360; // top of the ground row (canvas is 400 tall)
 const GROUND_H = 200;
 const HERO_SIZE = { width: 40, height: 56 };

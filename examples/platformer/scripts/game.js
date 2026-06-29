@@ -1,5 +1,5 @@
 import { EngineGame, EngineSideView } from '@engine';
-import { BoardScene } from './scenes/board';
+import { BoardScene, LEVEL_WIDTH } from './scenes/board';
 import { OverScene } from './scenes/over';
 
 export class Game extends EngineGame {
@@ -14,6 +14,7 @@ export class Game extends EngineGame {
       gravity: 1.3,
       jump: 150,
       worldHeight: 100_000,
+      worldWidth: LEVEL_WIDTH,
     });
 
     const state = { reason: null, won: false };

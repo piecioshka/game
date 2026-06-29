@@ -8,7 +8,6 @@ export class Game extends EngineGame {
     goomba: 'static/goomba-1.png',
     goomba2: 'static/goomba-2.png',
     goomba3: 'static/goomba-3.png',
-    cloud: 'static/cloud.png',
   };
 
   constructor(props) {
@@ -18,7 +17,7 @@ export class Game extends EngineGame {
 
     const viewType = new EngineSideView({
       gravity: 1.3,
-      jump: 130,
+      jump: 170,
       worldHeight: props.height,
     });
 

@@ -1,29 +1,70 @@
 // Canvas drawers for the side-view game props that have no image asset.
 
-export function drawMushroom(ctx, { x, y, width, height }) {
-  const capHeight = height * 0.55;
-  const cx = x + width / 2;
+// Paints a sprite described as rows of single-character color keys onto the
+// box {x, y, width, height}. A space (or '.') means transparent.
+function drawPixels(ctx, { x, y, width, height }, rows, palette) {
+  const cols = Math.max(...rows.map((r) => r.length));
+  const px = width / cols;
+  const py = height / rows.length;
+  for (let row = 0; row < rows.length; row += 1) {
+    const line = rows[row];
+    for (let col = 0; col < line.length; col += 1) {
+      const key = line[col];
+      const color = palette[key];
+      if (!color) {
+        continue;
+      }
+      ctx.fillStyle = color;
+      // +1 avoids hairline gaps between pixels on fractional scales.
+      ctx.fillRect(x + col * px, y + row * py, px + 1, py + 1);
+    }
+  }
+}
 
-  // Cap
-  ctx.fillStyle = '#e53935';
-  ctx.beginPath();
-  ctx.moveTo(x, y + capHeight);
-  ctx.quadraticCurveTo(x, y, cx, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + capHeight);
-  ctx.closePath();
-  ctx.fill();
+// Classic toadstool: red cap, white spots, pale stem. 11x11 grid keeps the
+// 66x66 footprint square so the sprite is not stretched.
+const MUSHROOM = [
+  '...RRRRR...',
+  '..RRRRRRR..',
+  '.RRWRRRWRR.',
+  '.RRRRRRRRR.',
+  'RRWRRRRRWRR',
+  'RRRRRRRRRRR',
+  'RRRWRRRWRRR',
+  '.RRRRRRRRR.',
+  '...SSSSS...',
+  '...STTTS...',
+  '...SSSSS...',
+];
+const MUSHROOM_PALETTE = {
+  R: '#e53935', // cap
+  W: '#ffffff', // spots
+  S: '#d7a86e', // stem shade
+  T: '#ffe0b2', // stem fill
+};
 
-  // Spots
-  ctx.fillStyle = '#ffffff';
-  ctx.beginPath();
-  ctx.arc(cx, y + capHeight * 0.5, width * 0.12, 0, Math.PI * 2);
-  ctx.arc(x + width * 0.25, y + capHeight * 0.7, width * 0.08, 0, Math.PI * 2);
-  ctx.arc(x + width * 0.75, y + capHeight * 0.7, width * 0.08, 0, Math.PI * 2);
-  ctx.fill();
+export function drawMushroom(ctx, box) {
+  drawPixels(ctx, box, MUSHROOM, MUSHROOM_PALETTE);
+}
 
-  // Stem
-  ctx.fillStyle = '#ffe0b2';
-  ctx.fillRect(x + width * 0.3, y + capHeight, width * 0.4, height - capHeight);
+// A puffy cloud: white body ('C') with a darker blue outline ('O'). 14x8 grid.
+const CLOUD = [
+  '......OOOO....',
+  '....OOCCCCOO..',
+  '...OCCCCCCCCO.',
+  '.OOCCCCCCCCCCO',
+  'OCCCCCCCCCCCCO',
+  'OCCCCCCCCCCCCO',
+  'OCCCCCCCCCCCCO',
+  '.OOOOOOOOOOOO.',
+];
+const CLOUD_PALETTE = {
+  C: '#ffffff', // body
+  O: '#3a48b8', // outline
+};
+
+export function drawCloud(ctx, box) {
+  drawPixels(ctx, box, CLOUD, CLOUD_PALETTE);
 }
 
 export function drawBrick(ctx, { x, y, width, height }) {
