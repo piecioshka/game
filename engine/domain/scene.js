@@ -46,5 +46,6 @@ export class EngineScene extends EntitiesManager {
     // );
     this.runOnAllEntities('destroy');
     this.destroyEntities();
+    this.collision.reset();
   }
 }

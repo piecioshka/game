@@ -5,6 +5,10 @@ export class CollisionDetector {
     this.#toTest.push({ player, entities, handler });
   }
 
+  reset() {
+    this.#toTest.length = 0;
+  }
+
   update() {
     this.#toTest.forEach(({ player, entities, handler }) => {
       const { x: px, y: py, width: pWidth, height: pHeight } = player.config;
