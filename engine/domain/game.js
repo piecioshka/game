@@ -1,5 +1,6 @@
 import { EngineWorld } from './world';
 import { EngineAssetsLoader } from '../internal/assets-loader';
+import { setupDevMode } from '../internal/dev-mode';
 
 export class EngineGame {
   assets = {};
@@ -26,6 +27,9 @@ export class EngineGame {
 
   async start() {
     this.world.setSize(this.config);
+
+    // Dev mode: double-tap "b" to toggle bounding boxes.
+    setupDevMode(this.world);
 
     try {
       await EngineAssetsLoader.load(this.assets);

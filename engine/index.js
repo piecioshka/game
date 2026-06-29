@@ -9,6 +9,7 @@ export * from './entities/entity';
 
 export * from './internal/assets-loader';
 export * from './internal/auto-pilot';
+export * from './internal/dev-mode';
 export * from './internal/sprite-animation';
 
 export * from './utils/keys';

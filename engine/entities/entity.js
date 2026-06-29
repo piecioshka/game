@@ -161,21 +161,14 @@ export class Entity extends EventEmitter {
       return;
     }
 
-    // Background
-    ctx.fillStyle = 'rgba(25, 180, 5, 0.8)';
+    // A translucent fill plus a solid outline, so the entity's image stays
+    // visible underneath while the box highlights its hit area (dev mode).
+    ctx.fillStyle = 'rgba(25, 180, 5, 0.2)';
     ctx.fillRect(cfg.x, cfg.y, cfg.width, cfg.height);
 
-    // Border
-    // ctx.beginPath();
-    // ctx.lineWidth = 0.3;
-    // ctx.moveTo(cfg.x, cfg.y);
-    // ctx.lineTo(cfg.x + cfg.width, cfg.y);
-    // ctx.lineTo(cfg.x + cfg.width, cfg.y + cfg.height);
-    // ctx.lineTo(cfg.x, cfg.y + cfg.height);
-    // ctx.lineTo(cfg.x, cfg.y);
-    // ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
-    // ctx.lineCap = 'square';
-    // ctx.stroke();
+    ctx.strokeStyle = 'rgba(25, 180, 5, 0.9)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(cfg.x + 0.5, cfg.y + 0.5, cfg.width - 1, cfg.height - 1);
   }
 
   _renderBoundingPoints() {
