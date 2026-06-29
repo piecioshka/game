@@ -18,9 +18,9 @@
   - [x] UI Events on entities
 - [x] Arcade entity (like player)
   - [x] Create
-- [ ] Controlling: with keyboard
+- [x] Controlling: with keyboard
   - [x] Support different keys controls for each character on board
-  - [ ] Auto-moving by computer
+  - [x] Auto-moving by computer
 - [x] Scenes
   - Switching between them
 - [x] Views: Top Down View
@@ -32,7 +32,7 @@
 - [ ] Countdown
   - [ ] Create
   - [ ] Start / pause / stop
-- [ ] Load sprite
+- [x] Load sprite
   - Change image during rendering entity
 - [x] Map
 
