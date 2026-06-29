@@ -1,5 +1,6 @@
 import { Entity } from './entity';
 import { EngineKeyboard } from '../internal/keyboard';
+import { AutoPilot } from '../internal/auto-pilot';
 import { KEYS } from '../utils/keys';
 
 export class ArcadeEntity extends Entity {
@@ -19,13 +20,23 @@ export class ArcadeEntity extends Entity {
    */
   keyboard = new EngineKeyboard();
 
+  /**
+   * @type {AutoPilot|null}
+   */
+  autoPilot = null;
+
   constructor(props) {
-    const { controlKeys, deltaMove, ...newProps } = props;
+    const { controlKeys, deltaMove, autoMove, ...newProps } = props;
     super(newProps);
     // console.debug(`ArcadeEntity > new [${this.config.name}]`);
     this.controlKeys = controlKeys;
     this.deltaMove = deltaMove;
     this._setupBindings();
+
+    if (autoMove) {
+      // INFO: When "autoMove" is defined the entity is controlled by computer
+      this.autoPilot = new AutoPilot(autoMove);
+    }
   }
 
   _setupBindings() {
@@ -58,6 +69,25 @@ export class ArcadeEntity extends Entity {
   update() {
     super.update();
     this.keyboard?.update();
+    this._updateAutoPilot();
+  }
+
+  _updateAutoPilot() {
+    if (!this.autoPilot) {
+      return;
+    }
+
+    const viewType = this.config.viewType;
+    const move = this.autoPilot.nextMove(this);
+
+    const actions = {
+      up: viewType?.onPressUp,
+      right: viewType?.onPressRight,
+      down: viewType?.onPressDown,
+      left: viewType?.onPressLeft,
+    };
+
+    actions[move]?.call(viewType, this);
   }
 
   destroy() {

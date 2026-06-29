@@ -1,4 +1,10 @@
-import { EngineScene, ArcadeEntity, Countdown, KEYS } from '@engine';
+import {
+  EngineScene,
+  ArcadeEntity,
+  Countdown,
+  SpriteAnimation,
+  KEYS,
+} from '@engine';
 import { Mushroom } from './entities/mushroom';
 import { Brick } from './entities/brick';
 import { Enemy } from './entities/enemy';
@@ -105,6 +111,13 @@ export class BoardScene extends EngineScene {
       height: 66,
       speed,
     });
+    // INFO: Animate the goomba by cycling its sprite frames during rendering
+    enemy.setAnimation(
+      new SpriteAnimation({
+        frames: ['goomba', 'goomba2', 'goomba3'],
+        fps: 6,
+      }),
+    );
     this.enemies.push(enemy);
     this.addEntity(enemy);
   }
