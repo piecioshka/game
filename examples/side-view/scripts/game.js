@@ -18,7 +18,7 @@ export class Game extends EngineGame {
 
     const viewType = new EngineSideView({
       gravity: 1.3,
-      jump: 80,
+      jump: 130,
       worldHeight: props.height,
     });
 

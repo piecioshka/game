@@ -42,6 +42,14 @@ module.exports = (env) => {
             name: '[folder]/[name].[ext]',
           },
         },
+        {
+          test: /\.(ttf|woff2?)$/,
+          exclude: /node_modules/,
+          loader: 'file-loader',
+          options: {
+            name: 'fonts/[name].[ext]',
+          },
+        },
       ],
     },
 

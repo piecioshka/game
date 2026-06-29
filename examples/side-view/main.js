@@ -2,7 +2,7 @@ import './index.html';
 import './main.css';
 import { Game } from './scripts/game';
 
-function main() {
+async function main() {
   const $area = document.querySelector('#game');
 
   const game = new Game({
@@ -14,6 +14,9 @@ function main() {
   // game.world.config.isVisiblePlayerLabel = true;
   // game.world.config.isVisibleBoundingBox = true;
   // game.world.config.isVisibleBoundingPoints = true;
+
+  // Make sure the pixel font is ready before the canvas draws any text.
+  await document.fonts.load('16px "Press Start 2P"');
 
   game.start();
 }

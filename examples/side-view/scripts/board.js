@@ -14,7 +14,7 @@ const DURATION = 30_000;
 const MUSHROOM_INTERVAL = 80; // frames between mushroom spawns
 const MAX_MUSHROOMS = 6;
 const MUSHROOM_POINTS = 10;
-const MUSHROOM_SIZE = 34;
+const MUSHROOM_SIZE = 66; // same footprint as an enemy
 const GAME_OVER_DELAY = 1000; // ms the board stays frozen before Game Over
 
 // The wall/ledge ("murek") the player can jump onto.
@@ -200,6 +200,9 @@ export class BoardScene extends EngineScene {
     const isFalling = (this.player.velocityY ?? 0) > 0;
     const isAbove = playerFoot <= enemyTop + enemy.config.height * 0.6;
 
+    // Once touched, the enemy freezes in place.
+    enemy.stopped = true;
+
     if (isFalling && isAbove) {
       this._stomp(enemy);
     } else {
@@ -272,13 +275,13 @@ export class BoardScene extends EngineScene {
     const ctx = world.context;
     const seconds = (this.countdown.getRemaining() / 1000).toFixed(1);
 
-    ctx.font = 'bold 20px monospace';
+    ctx.font = '16px "Press Start 2P"';
     ctx.fillStyle = '#ffffff';
 
     ctx.textAlign = 'left';
-    ctx.fillText(`🍄 ${this.score}`, 16, 30);
+    ctx.fillText(`x${this.score}`, 16, 34);
 
     ctx.textAlign = 'right';
-    ctx.fillText(`⏱ ${seconds}s`, world.width - 16, 30);
+    ctx.fillText(`${seconds}s`, world.width - 16, 34);
   }
 }

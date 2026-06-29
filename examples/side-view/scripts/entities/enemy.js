@@ -4,6 +4,9 @@ import { Entity } from '@engine';
 // around at the edge of whatever surface it is standing on (so it never walks
 // off a ledge), while gravity (applied by the side-view) keeps it grounded.
 export class Enemy extends Entity {
+  // Set to true once the player has touched this enemy: it freezes in place.
+  stopped = false;
+
   constructor(props) {
     const { speed, ...rest } = props;
     super(rest);
@@ -12,6 +15,12 @@ export class Enemy extends Entity {
   }
 
   update() {
+    if (this.stopped) {
+      // Touched by the player: stop patrolling (gravity/render still run).
+      super.update();
+      return;
+    }
+
     const world = this.config.world;
     const { x, width } = this.config;
     let nextX = x + this.direction * this.speed;
