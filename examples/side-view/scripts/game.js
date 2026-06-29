@@ -8,6 +8,7 @@ export class Game extends EngineGame {
     goomba: 'static/goomba-1.png',
     goomba2: 'static/goomba-2.png',
     goomba3: 'static/goomba-3.png',
+    cloud: 'static/cloud.png',
   };
 
   constructor(props) {

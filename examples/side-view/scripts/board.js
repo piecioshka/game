@@ -3,6 +3,7 @@ import {
   ArcadeEntity,
   Countdown,
   SpriteAnimation,
+  EngineAssetsLoader,
   KEYS,
 } from '@engine';
 import { Mushroom } from './entities/mushroom';
@@ -18,6 +19,13 @@ const MUSHROOM_SIZE = 34;
 // The wall/ledge ("murek") the player can jump onto.
 const BRICK = { x: 380, y: 250, width: 140, height: 150 };
 
+// Static background clouds (drawn from the "cloud" image asset).
+const CLOUDS = [
+  { x: 120, y: 50, scale: 1 },
+  { x: 470, y: 90, scale: 0.7 },
+  { x: 700, y: 40, scale: 1.2 },
+];
+
 export class BoardScene extends EngineScene {
   countdown = null;
   player = null;
@@ -27,6 +35,7 @@ export class BoardScene extends EngineScene {
 
   #frame = 0;
   #over = false;
+  #dying = false;
 
   setup() {
     const { world, viewType } = this.config;
@@ -37,6 +46,7 @@ export class BoardScene extends EngineScene {
     this.enemies = [];
     this.#frame = 0;
     this.#over = false;
+    this.#dying = false;
 
     // The player can land on the brick.
     viewType.config.platforms = [BRICK];
@@ -74,8 +84,8 @@ export class BoardScene extends EngineScene {
     this._spawnEnemy(220, ground - 66, 2.2);
     this._spawnEnemy(680, ground - 66, -1.6);
 
-    this.collision.overlap(this.player, this.enemies, () =>
-      this._gameOver('enemy'),
+    this.collision.overlap(this.player, this.enemies, (enemy) =>
+      this._onEnemyTouch(enemy),
     );
     this.collision.overlap(this.player, this.mushrooms, (mushroom) =>
       this._collect(mushroom),
@@ -86,8 +96,19 @@ export class BoardScene extends EngineScene {
     if (this.#over) {
       return;
     }
+
     this.setBackgroundColor('#5c94fc'); // classic sky blue
+    this._renderClouds();
     this._renderGround();
+
+    if (this.#dying) {
+      // Frozen beat before Game Over: keep the scene on screen but stop time,
+      // spawning and movement. Draw entities without updating them.
+      this.render();
+      this._renderHud();
+      return;
+    }
+
     this.countdown.update();
     this._spawnMushroom();
     super.update();
@@ -103,6 +124,7 @@ export class BoardScene extends EngineScene {
   _spawnEnemy(x, y, speed) {
     const enemy = new Enemy({
       world: this.config.world,
+      viewType: this.config.viewType, // subject to gravity, like the player
       name: 'Enemy',
       assetId: 'goomba',
       x,
@@ -111,10 +133,11 @@ export class BoardScene extends EngineScene {
       height: 66,
       speed,
     });
-    // INFO: Animate the goomba by cycling its sprite frames during rendering
+    // INFO: Walk cycle uses two frames; "goomba3" is reserved for the squashed
+    // pose shown when the player stomps it from above.
     enemy.setAnimation(
       new SpriteAnimation({
-        frames: ['goomba', 'goomba2', 'goomba3'],
+        frames: ['goomba', 'goomba2'],
         fps: 6,
       }),
     );
@@ -163,11 +186,52 @@ export class BoardScene extends EngineScene {
     }
   }
 
-  _gameOver(reason) {
-    if (this.#over) {
+  // The player hit an enemy. Stomping it from above scores a point; touching
+  // it from the side is fatal.
+  _onEnemyTouch(enemy) {
+    if (this.#over || this.#dying || !enemy.alive || enemy.squashed) {
       return;
     }
-    this.#over = true;
+
+    const player = this.player.config;
+    const playerFoot = player.y + player.height;
+    const enemyTop = enemy.config.y;
+    const isFalling = (this.player.velocityY ?? 0) > 0;
+    const isAbove = playerFoot <= enemyTop + enemy.config.height * 0.6;
+
+    if (isFalling && isAbove) {
+      this._stomp(enemy);
+    } else {
+      this._gameOver('enemy');
+    }
+  }
+
+  _stomp(enemy) {
+    this.score += MUSHROOM_POINTS;
+
+    // Show the squashed pose ("goomba3") instead of the walk cycle, then remove
+    // the enemy shortly after.
+    enemy.squashed = true;
+    enemy.animation = null;
+    enemy.setAsset('goomba3');
+
+    // Bounce the player back up.
+    this.player.velocityY = -8;
+
+    setTimeout(() => {
+      enemy.destroy();
+      this.removeEntity(enemy);
+      const index = this.enemies.indexOf(enemy);
+      if (index >= 0) {
+        this.enemies.splice(index, 1);
+      }
+    }, 400);
+  }
+
+  _gameOver(reason) {
+    if (this.#over || this.#dying) {
+      return;
+    }
 
     const state = this.config.state;
     if (state) {
@@ -175,7 +239,24 @@ export class BoardScene extends EngineScene {
       state.reason = reason;
     }
 
-    this.config.world.startScene('over');
+    // Freeze the board for a beat so the player can see what happened, then
+    // switch to the Game Over screen.
+    this.#dying = true;
+    setTimeout(() => {
+      this.#over = true;
+      this.config.world.startScene('over');
+    }, 2000);
+  }
+
+  _renderClouds() {
+    const ctx = this.config.world.context;
+    const img = EngineAssetsLoader.getLoadedAsset('cloud');
+    if (!img) {
+      return;
+    }
+    CLOUDS.forEach(({ x, y, scale }) => {
+      ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+    });
   }
 
   _renderGround() {
