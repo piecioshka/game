@@ -1,6 +1,10 @@
 # game
 
-:video_game: Canvas 2D Game Engine
+🎮 Canvas 2D Game Engine
+
+## Preview 🎉
+
+<https://piecioshka.github.io/game/>
 
 ## Features
 
@@ -17,10 +21,6 @@
 - ✅ Tile-based map (color or image tiles)
 - ✅ Countdown timer (start / pause / resume / stop)
 
-## Preview 🎉
-
-<https://piecioshka.github.io/game/>
-
 ## Examples
 
 - <https://piecioshka.github.io/game/top-down-view/>
@@ -28,4 +28,4 @@
 
 ## License
 
-[The MIT License](http://piecioshka.mit-license.org) @ 2020
+[The MIT License](https://piecioshka.mit-license.org) @ 2026
