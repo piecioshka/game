@@ -1,5 +1,6 @@
 import { EngineGame, EngineSideView } from '@engine';
 import { BoardScene } from './board';
+import { GameOverScene } from './game-over';
 
 export class Game extends EngineGame {
   assets = {
@@ -15,9 +16,14 @@ export class Game extends EngineGame {
     const viewType = new EngineSideView({
       gravity: 1.3,
       jump: 80,
+      worldHeight: props.height,
     });
 
-    world.addScene('board', new BoardScene({ world, viewType }));
+    // Shared state passed between scenes (final score + how the game ended).
+    const state = { score: 0, reason: null };
+
+    world.addScene('board', new BoardScene({ world, viewType, state }));
+    world.addScene('over', new GameOverScene({ world, state }));
 
     world.startScene('board');
   }

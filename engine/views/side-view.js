@@ -1,30 +1,69 @@
 import { EngineView } from './view';
 
-// TODO(piecioshka): find a way to read this value from world config
-const worldHeight = 400;
-
 export class EngineSideView extends EngineView {
   config = {
     gravity: 0,
     jump: 0, // [0-100]
+    worldHeight: 400,
+    /**
+     * Solid surfaces the entity can land on, e.g. a wall/ledge ("murek").
+     * Each platform: { x, y, width, height }
+     * @type {Array<{x: number, y: number, width: number, height: number}>}
+     */
+    platforms: [],
   };
 
   constructor(props) {
     super();
-    this.config.gravity = props.gravity;
-    this.config.jump = props.jump;
+    Object.assign(this.config, props);
   }
 
   update(entity) {
-    const gravity = this.config.gravity;
     const { y, height } = entity.config;
-    const isOnTheBottom = y + height >= worldHeight;
+    const floor = this._floorY(entity);
+    const isOnFloor = y + height >= floor;
 
-    if (!isOnTheBottom) {
-      entity.moveTo({
-        y: y + ((worldHeight - height) * gravity) / 100,
-      });
+    if (isOnFloor) {
+      // Rest exactly on the surface (avoids sinking below a platform top).
+      if (y + height > floor) {
+        entity.moveTo({ y: floor - height });
+      }
+      return;
     }
+
+    const step = this._gravityStep(height);
+    const nextBottom = y + height + step;
+    if (nextBottom >= floor) {
+      entity.moveTo({ y: floor - height });
+    } else {
+      entity.moveTo({ y: y + step });
+    }
+  }
+
+  _gravityStep(height) {
+    return ((this.config.worldHeight - height) * this.config.gravity) / 100;
+  }
+
+  /**
+   * The Y of the surface under the entity: the world bottom, or a platform top
+   * when the entity is horizontally over it and currently at/above its top.
+   */
+  _floorY(entity) {
+    const { x, width, y, height } = entity.config;
+    let floor = this.config.worldHeight;
+
+    const landTolerance = this._gravityStep(height) + 4;
+
+    this.config.platforms.forEach((platform) => {
+      const overlapX =
+        x + width > platform.x && x < platform.x + platform.width;
+      const isAbove = y + height <= platform.y + landTolerance;
+      if (overlapX && isAbove && platform.y < floor) {
+        floor = platform.y;
+      }
+    });
+
+    return floor;
   }
 
   _updatePosition(entity, newPosition) {
@@ -51,26 +90,25 @@ export class EngineSideView extends EngineView {
   }
 
   onPressUp(entity) {
-    // console.debug('EngineSideView > onPressAButton', entity);
     this.#jump(entity);
   }
 
   onPressAButton(entity) {
-    // console.debug('EngineSideView > onPressAButton', entity);
     this.#jump(entity);
   }
 
   #jump(entity) {
-    const jump = this.config.jump;
     const { y, height } = entity.config;
+    const floor = this._floorY(entity);
 
-    if (y + height < worldHeight) {
-      // INFO: Entity can jump only when is on the ground
+    if (y + height < floor) {
+      // INFO: Entity can jump only when it stands on a surface
       return;
     }
 
+    const jump = this.config.jump;
     this._updatePosition(entity, {
-      y: y - ((worldHeight - height) * jump) / 100,
+      y: y - ((this.config.worldHeight - height) * jump) / 100,
     });
   }
 }
