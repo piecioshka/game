@@ -1,12 +1,33 @@
-import { EngineScene, ArcadeEntity, KEYS } from '@engine';
+import { EngineScene, ArcadeEntity, EngineMap, KEYS } from '@engine';
+
+const TILE_SIZE = 100;
+
+function buildCheckerboard(world) {
+  const cols = Math.ceil(world.width / TILE_SIZE);
+  const rows = Math.ceil(world.height / TILE_SIZE);
+  const tiles = [];
+  for (let row = 0; row < rows; row += 1) {
+    const columns = [];
+    for (let col = 0; col < cols; col += 1) {
+      columns.push((row + col) % 2);
+    }
+    tiles.push(columns);
+  }
+  return tiles;
+}
 
 export class BoardScene extends EngineScene {
+  map = null;
+
   setup() {
     const { world, viewType } = this.config;
 
-    // setTimeout(() => {
-    //   world.startScene('over');
-    // }, 3000);
+    this.map = new EngineMap({
+      world,
+      tileSize: TILE_SIZE,
+      tiles: buildCheckerboard(world),
+      colors: { 0: '#7cb342', 1: '#689f38' },
+    });
 
     const player = new ArcadeEntity({
       world,
@@ -56,7 +77,7 @@ export class BoardScene extends EngineScene {
 
   update() {
     // console.debug('BoardScene > update');
-    this.setBackgroundColor('#a7e1fd');
+    this.map.render();
     super.update();
   }
 }

@@ -34,7 +34,7 @@
   - [ ] Start / pause / stop
 - [x] Load sprite
   - Change image during rendering entity
-- [ ] Map
+- [x] Map
 
 ## Example Game "top-down-view"
 

@@ -14,6 +14,7 @@
 - ✅ View Types: Side View (gravity, jumping)
 - ✅ Collisions
 - ✅ Sprite animation (swap entity image while rendering)
+- ✅ Tile-based map (color or image tiles)
 
 ## Preview 🎉
 
