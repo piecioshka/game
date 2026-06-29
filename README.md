@@ -6,6 +6,7 @@
 
 - ✅ Unlimited players
 - ✅ Independent keyboard controls for each player
+- ✅ Computer-controlled entities (auto-moving)
 - ✅ Display Bounding Box of all entities
 - ✅ Scenes (create, switch)
 - ✅ UI Events on any entity (like player)
