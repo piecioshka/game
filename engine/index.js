@@ -5,6 +5,7 @@ export * from './domain/world';
 export * from './entities/arcade-entity';
 export * from './entities/entity';
 
+export * from './internal/auto-pilot';
 export * from './internal/sprite-animation';
 
 export * from './utils/keys';
