@@ -9,6 +9,7 @@ module.exports = (env) => {
     entry: {
       'top-down-view': path.join(root, 'examples', 'top-down-view', 'main'),
       'side-view': path.join(root, 'examples', 'side-view', 'main'),
+      platformer: path.join(root, 'examples', 'platformer', 'main'),
     },
 
     output: {
