@@ -1,5 +1,11 @@
 # game
 
+<!-- prettier-ignore-start -->
+
+[![github-ci](https://github.com/piecioshka/game/actions/workflows/ci.yml/badge.svg)](https://github.com/piecioshka/game/actions/workflows/ci.yml)
+
+<!-- prettier-ignore-end -->
+
 🎮 Canvas 2D Game Engine
 
 ## Preview 🎉
